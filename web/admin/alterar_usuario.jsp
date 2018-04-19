@@ -74,14 +74,19 @@
 
 
             <%
-                Pessoa pessoa = (Pessoa) request.getAttribute("pessoa");
+                Usuario usuario = new Usuario();
+                usuario.setId(Integer.parseInt(request.getParameter("id")));
                 String msg = (String) request.getAttribute("msg");
+                
+                if (request.getAttribute("usuario_alterado") != null) {
+                    usuario = (Usuario) request.getAttribute("usuario_alterado");
+                }
+                
                 if (msg != null) {
             %>
             <font color="blue"><%=msg%></font>
             <%}%>
             <form action="${pageContext.request.contextPath}/ControleUsuario" method="POST">
-                <input type=" hidden" value="<%=pessoa.getId()%>" name = "idPessoa">ID Pessoa</input> 
                 <fieldset>
                     <legend>Dados para login </legend>
                     <table cellspacing="10">                     
@@ -90,7 +95,8 @@
                                 <label for="login">Login </label>
                             </td>
                             <td align="left">
-                                <input type="text" name="txtLogin" size="15" maxlength="15"> 
+                                <input type="text" name="id" id="id" style="display:none;" value="<%=usuario.getId()%>"/>
+                                <input type="text" name="txtLogin" size="15" maxlength="15" value="<%=usuario.getLogin()%>"> 
                             </td>
                         </tr>
 
@@ -99,12 +105,12 @@
                                 <label for="senha">Senha </label>
                             </td>
                             <td align="left">
-                                <input type="password" name="txtSenha" size="15" maxlength="15"> 
+                                <input type="password" name="txtSenha" size="15" maxlength="15" value="<%=usuario.getSenha()%>"> 
                             </td>
                         </tr>
 
                         <td>
-                            <label for="perfil">Perfil</label>
+                            <label for="perfil">Perfil</label >
                         </td>
                         <td align="left">
                             <select name="optPerfil"> 
@@ -115,7 +121,7 @@
                         </td>
                     </table>
                 </fieldset>
-                <button type="submit" class="w3-button w3-black " value="Cadastrar" name="acao">Enviar</button>
+                <button type="submit" class="w3-button w3-black " value="Alterar" name="acao">Enviar</button>
             </form></br></br>
             <td><a href="${pageContext.request.contextPath}/principal.jsp" class="w3-bar-item w3-button"> Voltar </a></td>
     </body>

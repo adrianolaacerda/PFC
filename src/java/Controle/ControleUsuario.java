@@ -8,6 +8,7 @@ package Controle;
 import Modelo.PerfilDeAcesso;
 import Modelo.Usuario;
 import DAO.UsuarioDAO;
+import Modelo.Pessoa;
 import java.io.IOException;
 import static java.lang.System.out;
 import java.sql.Date;
@@ -45,6 +46,8 @@ public class ControleUsuario extends HttpServlet {
                 Usuario usuario = new Usuario();
                 usuario.setLogin(request.getParameter("txtLogin"));
                 usuario.setSenha(request.getParameter("txtSenha"));
+                usuario.setPessoa(new Pessoa());
+                usuario.getPessoa().setId(Integer.parseInt(request.getParameter("idPessoa")));
                 String perfil = request.getParameter("optPerfil");
                 if (perfil.equalsIgnoreCase("funcionario")) {
                     usuario.setPerfil(PerfilDeAcesso.Funcionario);
@@ -57,8 +60,9 @@ public class ControleUsuario extends HttpServlet {
 
                 request.setAttribute("usuario", usuario);
                 request.setAttribute("msg", "cadastrado com sucesso");
-                RequestDispatcher rd = request.getRequestDispatcher("/principal.jsp");
-                rd.forward(request, response);
+                response.sendRedirect(request.getContextPath() + "/home.html");
+                //RequestDispatcher rd = request.getRequestDispatcher("/principal.jsp");
+                //rd.forward(request, response);
 
             } else if (acao.equals("Listar")) {
 
@@ -66,8 +70,9 @@ public class ControleUsuario extends HttpServlet {
                 ArrayList<Usuario> usuario = dao.listarUsuario();
 
                 //atribuir a lista ao request
-                request.setAttribute("listaUsuario", usuario);
-                request.getRequestDispatcher("/admin/listaUsuario.jsp").forward(request, response);
+                request.getSession().setAttribute("listaUsuario", usuario);
+                response.sendRedirect(request.getContextPath() + "/admin/listaUsuario.jsp");
+                //request.getRequestDispatcher("/admin/listaUsuario.jsp").forward(request, response);
 
             } else if (acao.equals("ConsultaPorID")) {
 
@@ -84,21 +89,22 @@ public class ControleUsuario extends HttpServlet {
 
             } else if (acao.equals("Alterar")) {
                 Usuario usuario = new Usuario();
-                usuario.setLogin(request.getParameter("txtLogin"));
-                usuario.setSenha(request.getParameter("txtSenha"));
-                String perfil = request.getParameter("optPerfil");
-                if (perfil.equalsIgnoreCase("funcionario")) {
-                    usuario.setPerfil(PerfilDeAcesso.Funcionario);
-                } else {
-                    usuario.setPerfil(PerfilDeAcesso.Cliente);
-                }
+                usuario.setId(Integer.parseInt(request.getParameter("id")));
 
                 UsuarioDAO usuarioDAO = new UsuarioDAO();
-                usuarioDAO.cadastrarUsuario(usuario);
-                request.setAttribute("msg", "cadastrado com sucesso");
-                RequestDispatcher rd = request.getRequestDispatcher("/admin/cadastro_usuario.jsp");
+                usuarioDAO.alterar(usuario);
+                request.setAttribute("msg", "alterado com sucesso");
+                RequestDispatcher rd = request.getRequestDispatcher("/admin/listaUsuario.jsp");
                 rd.forward(request, response);
 
+            } else if (acao.equals("AlterarUsuario")) {
+                Usuario u = new Usuario();
+                u.setId(Integer.parseInt(request.getParameter("id")));
+                UsuarioDAO dao = new UsuarioDAO();
+                u = dao.consultaPorID(u);
+                request.setAttribute("usuario_alterado", u);
+                RequestDispatcher rd = request.getRequestDispatcher("/admin/alterar_usuario.jsp");
+                rd.forward(request, response);
             } else if (acao.equals("Excluir")) {
 
                 UsuarioDAO dao = new UsuarioDAO();

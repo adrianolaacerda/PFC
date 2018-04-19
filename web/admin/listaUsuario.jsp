@@ -70,7 +70,7 @@
 
             <%
                 //recupera a lista do request
-                ArrayList<Usuario> listaUsuario = (ArrayList<Usuario>) request.getAttribute("listaUsuario");
+                ArrayList<Usuario> listaUsuario = (ArrayList<Usuario>) session.getAttribute("listaUsuario");
 
             %>
             <table width="100%" border="1">
@@ -93,7 +93,7 @@
 
                 </thead>            
                 <tbody>
-                    <%                    for (Usuario u : listaUsuario) {
+                        <%                    for (Usuario u : listaUsuario) {
 
                     %>
                     <tr>
@@ -101,10 +101,10 @@
                         <td> <%= u.getLogin()%></td>
                         <td> <%= u.getSenha()%> </td>
                         <td> <%= u.getPerfil()%> </td>
-                        <td> <%= u.getPessoa().getId()%>   </td>
+                        <td> <%= u.getPessoa().getId()%>  </td>
                         
                         
-                         <td> <a href="ControleUsuario?acao=consultaPorID&id=<%=u.getId()%>"class="w3-bar-item w3-button"> * </a> </td>
+                         <td> <a href="alterar_usuario.jsp?id=<%=u.getId()%>"class="w3-bar-item w3-button"> * </a> </td>
                         <td> <a href="ControleUsuario?acao=Excluir&id=<%=u.getId()%>"class="w3-bar-item w3-button"> ✖ </a> </td>
                     </tr>
                     <%

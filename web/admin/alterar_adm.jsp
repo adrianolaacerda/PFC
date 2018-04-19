@@ -32,9 +32,8 @@
                     Opções <i class="fa fa-caret-down"></i>
                 </a>
                 <div id="demoAcc" class="w3-bar-block w3-hide w3-padding-large w3-medium">
-                    <a href="${pageContext.request.contextPath}/admin/cadastro_adm.jsp" class="w3-bar-item w3-button">Cadastros</a>
-                    <a href="${pageContext.request.contextPath}/admin/listas_adm.jsp" class="w3-bar-item w3-button">Listas</a>
-                    <a href="${pageContext.request.contextPath}/admin/alterar_adm.jsp" class="w3-bar-item w3-button">Alterar</a>
+                    <a href="cadastro_adm.jsp" class="w3-bar-item w3-button">Cadastros</a>
+                    <a href="#" class="w3-bar-item w3-button">Listas</a>
                     <a href="#" class="w3-bar-item w3-button"></a>
                 </div>
             </div>
@@ -83,12 +82,18 @@
                 if (usuario != null) {
             %>
             <center>
-                <h1><b>Bem-vindo(a), <%=usuario.getLogin()%></b></h1>
+                <h2><b>Bem-vindo(a), <%=usuario.getLogin()%></b></h2>
                 <%}%>
             </center>
 
-            <a href="ControleAcesso?acao=Sair" class="w3-bar-item w3-button"> Logout </a><br/>
-
+            </br>   
+            <center>
+                <a href="./alterar_pessoa.jsp" class="w3-bar-item w3-button">Alterar clientes</a>   
+                <a href="./alterar_usuario.jsp" class="w3-bar-item w3-button">Alterar de usuários</a>               
+                <a href="./alterar_produto.jsp" class="w3-bar-item w3-button">Alterar de produtos</a></br> 
+            </center>
+            </br> </br> 
+            <a href="autenticado_adm.jsp" class="w3-bar-item w3-button"> Voltar </a><br/>
 
             </br>
 

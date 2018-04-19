@@ -88,9 +88,9 @@
 
             </br>   
             <center>
-                <a href="./listaPessoa.jsp" class="w3-bar-item w3-button">Lista de clientes</a>   
-                <a href="./listaUsuario.jsp" class="w3-bar-item w3-button">Lista de usuários</a>               
-                <a href="./listaProduto.jsp" class="w3-bar-item w3-button">Lista de produtos</a></br> 
+                <a href="${pageContext.request.contextPath}/ControlePessoa?acao=Listar" class="w3-bar-item w3-button">Lista de clientes</a>   
+                <a href="${pageContext.request.contextPath}/ControleUsuario?acao=Listar" class="w3-bar-item w3-button">Lista de usuários</a>               
+                <a href="${pageContext.request.contextPath}/ControleProduto?acao=Listar" class="w3-bar-item w3-button">Lista de produtos</a></br> 
             </center>
             </br> </br> 
             <a href="autenticado_adm.jsp" class="w3-bar-item w3-button"> Voltar </a><br/>

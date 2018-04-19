@@ -71,8 +71,8 @@ public class ControlePessoa extends HttpServlet {
                 ArrayList<Pessoa> pessoa = dao.listarPessoa();
 
                 //atribuir a lista ao request
-                request.setAttribute("listarPessoa", pessoa);
-                request.getRequestDispatcher("/admin/listarPessoa.jsp").forward(request, response);
+                request.getSession().setAttribute("listaPessoa", pessoa);
+                request.getRequestDispatcher("/admin/listaPessoa.jsp").forward(request, response);
 
                 // CONSULTAR 
             } else if (acao.equals("ConsultaPorID")) {

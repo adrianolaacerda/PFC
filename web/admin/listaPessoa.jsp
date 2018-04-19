@@ -2,10 +2,9 @@
     Document   : listaPessoa
     Created on : 12/04/2018, 23:28:16
     Author     : PC
---%>
+--%><%@page import="Modelo.Pessoa"%>
+\
 
-<%@page import="Modelo.Usuario"%>
-<%@page import="Modelo.Pessoa"%>
 <%@page import="java.util.ArrayList"%>
 
 <%@page import="java.util.List"%>
@@ -65,7 +64,7 @@
 
             <%
                 //recupera a lista do request
-                ArrayList<Pessoa> listaPessoas = (ArrayList<Pessoa>) request.getAttribute("listaPessoas");
+                ArrayList<Pessoa> listaPessoas = (ArrayList<Pessoa>) request.getSession().getAttribute("listaPessoa");
 
             %>
             
@@ -120,11 +119,11 @@
                         
                         <td> <a href="ControlePessoa?acao=consultaPorID&id=<%=pessoa.getId()%>"class="w3-bar-item w3-button"> * </a> </td>
                         <td> <a href="ControlePessoa?acao=Excluir&id=<%=pessoa.getId()%>"class="w3-bar-item w3-button"> ✖ </a> </td>
-                    </tr>
+                      </tr>
                     <%
                         } // fim do for
 %> 
-     </tbody>    
+                </tbody>    
             </table>
 
             </br></br>
