@@ -62,11 +62,13 @@ public class ControleUsuario extends HttpServlet {
                     request.setAttribute("msg", "cadastrado com sucesso");
                     request.setAttribute("usuario", usuario);
                 response.sendRedirect(request.getContextPath() + "/admin/sucesso.jsp");
-                }
-                 request.setAttribute("msg", "usuario ja existe");
+                } else {
+                    request.setAttribute("msg", "usuario ja existe");
                 request.setAttribute("usuario", usuario);
-                response.sendRedirect(request.getContextPath() + "/admin/cadastro_usuario.jsp");
-                //RequestDispatcher rd = request.getRequestDispatcher("/principal.jsp");
+                response.sendRedirect(request.getContextPath() + "/admin/usuario-existe.jsp");
+                }
+                 
+                //RequestDispatcher rd = request.getRequestDispatcher("/admin/cadastro_usuario.jsp");
                 //rd.forward(request, response);
 
             } else if (acao.equals("Listar")) {

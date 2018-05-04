@@ -74,16 +74,12 @@
 
 
             <%
-                Pessoa pessoa = null;
-                
-                if ((pessoa = (Pessoa) request.getAttribute("pessoa")) != null);
-                
-                String msg = null;
-                
-                if ((msg = (String) request.getAttribute("msg")) != null);
-                
+
+                Pessoa pessoa = (Pessoa) request.getAttribute("pessoa");
+                String msg = (String) request.getAttribute("msg");
                 if (msg != null) {
-                    %><script>alert("<%=msg%>");</script>
+
+            %><script>alert("<%=msg%>");</script>
             <font color="blue"><%=msg%></font>
             <%}%>
             <form action="${pageContext.request.contextPath}/ControleUsuario" method="POST">
