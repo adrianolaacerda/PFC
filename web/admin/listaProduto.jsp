@@ -1,7 +1,7 @@
 <%-- 
     Document   : listaProduto
     Created on : 21/02/2018, 16:09:23
-    Author     : thays.reis
+    Author     : pc
 --%>
 
 <%@page import="Modelo.Produto"%>
@@ -61,12 +61,6 @@
             <div class="w3-hide-large" style="margin-top:83px"></div>
 
 
-
-            <!-- Image header -->
-
-
-
-
             <%
                 //recupera a lista do request
                 ArrayList<Produto> listaProduto = (ArrayList<Produto>) request.getAttribute("listaProduto");
@@ -81,21 +75,20 @@
                 </br></br>
                 <center>
                     <align>
-                        <td>Codigo </td>
-                        <td>Nome</td>     
+                        <td>ID </td>
+                        <td>Nome</td>   
+                        <td>Data de Validade</td>
+                        <td>Quantidade</td>  
+                        <td>Preço</td> 
+                        <td>Tipo Preco</td> 
+                        <td>Categoria</td>
                         <td>Imagem</td>
-                        <td>Dt/Validade</td>
-                        <td>Tipo Preco</td>  
-                        <td>Preço</td>                        
-                        <td>Qtda</td>                                          
-                        <td>Qtda Minima</td>
-                        <td>Categoria</td>  
                         
                         <td>Alterar</td>
                         <td>Excluir</td>
-                        
-                    </align>
+                    
                 </center>
+                </align>
 
                 </thead>            
                 <tbody>
@@ -103,19 +96,19 @@
 
                     %>
                     <tr>
-                        <td> <%= p.getCodigo()%></td>
+                        <td> <%= p.getId()%></td>
                         <td> <%= p.getNome()%></td>
-                        <td> <%= p.getImagem()%> </td>
                         <td> <%= p.getDataValidade()%></td>
+                        <td> <%= p.getQuantidade()%> </td> 
+                        <td> <%= p.getPreco()%> </td>  
                         <td> <%= p.getTipoPreco()%></td>
-                        <td> <%= p.getPreco()%> </td>                        
-                        <td> <%= p.getQuantidade()%> </td>                                            
-                        <td> <%= p.getQuantidadeMinima()%>   </td>
                         <td> <%= p.getCategoria()%></td>
+                        <td> <%= p.getImagem()%> </td>
+                    
                         
 
-                        <td><a href="ControleProduto?acao=Alterar" class="w3-bar-item w3-button"> ❖ </a></td>
-                        <td> <a href="ControleProduto?acao=Excluir&codigo=<%=p.getCodigo()%>"class="w3-bar-item w3-button"> ✖ </a> </td>
+                        <td><a href="ControleProduto?acao=AlterarProduto&id=<%=p.getId()%>" class="w3-bar-item w3-button"> ❖ </a></td>
+                        <td> <a href="ControleProduto?acao=Excluir&id=<%=p.getId()%>"class="w3-bar-item w3-button"> ✖ </a> </td>
                     </tr>
                     <%
                         } // fim do for
@@ -125,7 +118,7 @@
 
             </br></br>
             <center>
-                <td><a href="principal.jsp" class="w3-bar-item w3-button"> Voltar </a></td>
+                <td><a href="admin/listas_adm.jsp" class="w3-bar-item w3-button"> Voltar </a></td>
             </center>
             <!-- Footer -->
             <footer class="w3-padding-64 w3-light-grey w3-small w3-center" id="footer">

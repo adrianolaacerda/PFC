@@ -36,6 +36,7 @@ public class PessoaDAO {
     private static final String SELECT_PESSOA = "SELECT * FROM pessoa";
     private static final String UPDATE_PESSOA = "UPDATE pessoa SET nome = ?, cpf = ?, rg = ?, dataNasc = ?, email = ?, telefone = ?, logradouro = ?, numero = ?, cep = ?, bairro = ?, cidade = ?, estado = ? WHERE id = ?";
     private static final String DELETE_PESSOA = "DELETE FROM pessoa WHERE id = ?";
+    private static final String SELECT_ID = "SELECT * FROM pessoa WHERE id = ?";
 
     // cadastrar novo usuário
     public void cadastrarPessoa(Pessoa pessoa) {
@@ -113,7 +114,7 @@ public class PessoaDAO {
             pessoa.setCidade(rs.getString("cidade"));
             pessoa.setEstado(rs.getString("estado"));
 
-            consultaPorID(pessoa);
+            //consultaPorID(pessoa);
             listarPessoa.add(pessoa);
 
         }
@@ -121,40 +122,41 @@ public class PessoaDAO {
         return listarPessoa;
     }
 
-    public void consultaPorID(Pessoa pessoa) {
+    public Pessoa consultarPessoa(Pessoa pessoa) {
 
         try {
 
             Connection conexao = ConectaBanco.getConexao();
 
-            PreparedStatement pstmt = conexao.prepareStatement(SELECT_PESSOA);
+            PreparedStatement pstmt = conexao.prepareStatement(SELECT_ID);
+            pstmt.setInt(1, pessoa.getId());
 
             ResultSet rs = pstmt.executeQuery();
 
-            while (rs.next()) {
-                Pessoa pessoas = new Pessoa();
+            if (rs.next()) {
 
-                pessoas.setId(rs.getInt("id"));
-                pessoas.setNome(rs.getString("nome"));
-                pessoas.setCpf(rs.getInt("cpf"));
-                pessoas.setRg(rs.getInt("rg"));
-                pessoas.setDataNasc(rs.getDate("dataNasc"));
-                pessoas.setEmail(rs.getString("email"));
-                pessoas.setTelefone(rs.getString("telefone"));
-                pessoas.setLogradouro(rs.getString("logradouro"));
-                pessoas.setNumero(rs.getInt("numero"));
-                pessoas.setCep(rs.getInt("cep"));
-                pessoas.setBairro(rs.getString("bairro"));
-                pessoas.setCidade(rs.getString("cidade"));
-                pessoas.setEstado(rs.getString("estado"));
+                //pessoa.setId(rs.getInt("id"));
+                pessoa.setNome(rs.getString("nome"));
+                pessoa.setCpf(rs.getInt("cpf"));
+                pessoa.setRg(rs.getInt("rg"));
+                pessoa.setDataNasc(rs.getDate("dataNasc"));
+                pessoa.setEmail(rs.getString("email"));
+                pessoa.setTelefone(rs.getString("telefone"));
+                pessoa.setLogradouro(rs.getString("logradouro"));
+                pessoa.setNumero(rs.getInt("numero"));
+                pessoa.setCep(rs.getInt("cep"));
+                pessoa.setBairro(rs.getString("bairro"));
+                pessoa.setCidade(rs.getString("cidade"));
+                pessoa.setEstado(rs.getString("estado"));
+                
+                      return pessoa;  
 
-                pessoa.addPessoa(pessoa);
             }
 
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-
+        return null;
     }
 
     public void alterar(Pessoa pessoa) {
@@ -178,6 +180,7 @@ public class PessoaDAO {
             pstmt.setString(10, pessoa.getBairro());
             pstmt.setString(11, pessoa.getCidade());
             pstmt.setString(12, pessoa.getEstado());
+            pstmt.setInt(13, pessoa.getId());
             pstmt.executeUpdate();
 
         } catch (SQLException e) {

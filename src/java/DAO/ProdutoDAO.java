@@ -14,71 +14,88 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
- * @author thays.reis
+ * @author PC
  */
 public class ProdutoDAO {
-    private static final String INSERT = "INSERT INTO produto (nome, imagem, dataValidade, tipoPreco, preco, quantidade, quantidadeMinima, categoria) VALUES(?,?,?,?,?,?,?,?)";
-    private static final String SELECT_ALL = "SELECT * FROM produto";
-    private static final String UPDATE = "UPDATE produto SET codigo = ?, nome = ?, imagem = ?, dataValidade = ?, tipoPreco = ?, preco = ?, quantidade = ?, quantidadeMinima = ? WHERE codigo = ?";
-    private static final String DELETE = "DELETE FROM produto WHERE codigo = ?";
-    
-    public void cadastrar(Produto produto){
-        Connection conexao = null; 
+
+    private static final String CADASTRAR_PRODUTO = "INSERT INTO produto (nome, datavalidade, quantidade, preco, tipoPreco, categoria,imagem) VALUES(?,?,?,?,?,?,?)";
+    private static final String SELECT_PRODUTO = "SELECT * FROM produto";
+    private static final String UPDATE_PRODUTO = "UPDATE produto SET id = ?, nome = ?, dataValidade = ?, quantidade = ?, preco = ?, tipoPreco = ?, categoria=?, imagem = ? WHERE id = ?";
+    private static final String DELETE_PRODUTO = "DELETE FROM produto WHERE id = ?";
+
+    public void cadastrarProduto(Produto produto) {
+        Connection conexao = null;
         PreparedStatement pstmt = null;
         try {
 
             conexao = ConectaBanco.getConexao();
 
-            pstmt = conexao.prepareStatement(INSERT);
+            pstmt = conexao.prepareStatement(CADASTRAR_PRODUTO, PreparedStatement.RETURN_GENERATED_KEYS);
 
             pstmt.setString(1, produto.getNome());
-            pstmt.setString(2, produto.getImagem());
-            pstmt.setDate(3, produto.getDataValidade());
-            pstmt.setString(4, produto.getTipoPreco().toString());
-            pstmt.setDouble(5, produto.getPreco());
-            pstmt.setInt(6, produto.getQuantidade());
-            pstmt.setInt(7, produto.getQuantidadeMinima());
-            pstmt.setString(8, produto.getCategoria().toString());
+            pstmt.setDate(2, produto.getDataValidade());
+            pstmt.setInt(3, produto.getQuantidade());
+            pstmt.setDouble(4, produto.getPreco());
+            pstmt.setString(5, produto.getTipoPreco().toString());
+            pstmt.setString(6, produto.getCategoria().toString());
+            pstmt.setString(7, produto.getImagem());
             pstmt.execute();
-        }  catch (SQLException sqlErro) {
-            throw new RuntimeException(sqlErro);
+            
+            ResultSet rsIDProduto = pstmt.getGeneratedKeys();
+            rsIDProduto.next();
+            //seta o id do cliente gerado no banco
+            produto.setId(rsIDProduto.getInt("id"));
+
+            //confirma as operações
+            conexao.commit();
+
+        } catch (SQLException e) {
+            try {
+                conexao.rollback();
+
+            } catch (SQLException ex) {
+                Logger.getLogger(PessoaDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            Logger.getLogger(Produto.class.getName()).
+                    log(Level.SEVERE, "Erro ao cadastrar: " + e.getMessage());
         } finally {
+            //4
             if (conexao != null) {
                 try {
                     conexao.close();
                 } catch (SQLException ex) {
-                    throw new RuntimeException(ex);
+                    Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
     }
-    
+
     public ArrayList<Produto> listar() throws SQLException {
         ArrayList<Produto> listaProduto = new ArrayList<Produto>();
 
         Connection conexao = ConectaBanco.getConexao();
 
-        PreparedStatement pstmt = conexao.prepareStatement(SELECT_ALL);
+        PreparedStatement pstmt = conexao.prepareStatement(SELECT_PRODUTO);
 
         ResultSet rs = pstmt.executeQuery();
 
         while (rs.next()) {
             Produto produto = new Produto();
-            
 
-            produto.setCodigo(rs.getInt("codigo"));
+            produto.setId(rs.getInt("id"));
             produto.setNome(rs.getString("nome"));
-            produto.setImagem(rs.getString("imagem"));
             produto.setDataValidade(rs.getDate("dataValidade"));
-            produto.setTipoPreco(TipoProduto.valueOf(rs.getString("tipoPreco")));
-            produto.setPreco(rs.getDouble("preco"));
             produto.setQuantidade(rs.getInt("quantidade"));
-            produto.setQuantidadeMinima(rs.getInt("quantidadeMinima"));
+            produto.setPreco(rs.getDouble("preco"));
+            produto.setTipoPreco(TipoProduto.valueOf(rs.getString("tipoPreco")));
             produto.setCategoria(Categoria.valueOf(rs.getString("categoria")));
-            
+            produto.setImagem(rs.getString("imagem"));
+
             consultarProduto(produto);
             listaProduto.add(produto);
 
@@ -86,32 +103,64 @@ public class ProdutoDAO {
 
         return listaProduto;
     }
-    
-     private void consultarProduto(Produto produto){
-        
-        try{
-            
-        Connection conexao = ConectaBanco.getConexao();
 
-        PreparedStatement pstmt = conexao.prepareStatement(SELECT_ALL);
+    public Produto consultarProduto(Produto produto) {
 
-        ResultSet rs = pstmt.executeQuery();
-            
-            while(rs.next()){
+        try {
+
+            Connection conexao = ConectaBanco.getConexao();
+
+            PreparedStatement pstmt = conexao.prepareStatement(SELECT_PRODUTO);
+
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
                 Produto prod = new Produto();
-                prod.setCodigo(rs.getInt("codigo"));
+                prod.setId(rs.getInt("id"));
                 prod.setNome(rs.getString("nome"));
+                prod.setDataValidade(rs.getDate("dataValidade"));
+                prod.setQuantidade(rs.getInt("quantidade"));
                 prod.setPreco(rs.getDouble("preco"));
-                
-                produto.addProduto(produto);
+                prod.setTipoPreco(TipoProduto.valueOf(rs.getString("tipoPreco")));
+                prod.setCategoria(Categoria.valueOf(rs.getString("categoria")));
+                prod.setImagem(rs.getString("imagem"));
+
+                return prod;
             }
-   
-        }catch(Exception e){
+
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        
-        
-        
+        return null;
+    }
+    
+    public void alterar(Produto produto) {
+        Connection conexao = null;
+
+        try {
+
+            conexao = ConectaBanco.getConexao();
+
+            PreparedStatement pstmt = conexao.prepareStatement(UPDATE_PRODUTO);
+
+            pstmt.setString(1, produto.getNome());
+            pstmt.setDate(2, produto.getDataValidade());
+            pstmt.setInt(3, produto.getQuantidade());
+            pstmt.setDouble(4, produto.getPreco());
+            pstmt.setString(5, produto.getTipoPreco().toString());
+            pstmt.setString(6, produto.getCategoria().toString());
+            pstmt.setString(7, produto.getImagem());
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                conexao.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 
     public void excluir(Produto produto) {
@@ -121,8 +170,8 @@ public class ProdutoDAO {
 
             conexao = ConectaBanco.getConexao();
 
-            PreparedStatement pstmt = conexao.prepareStatement(DELETE);
-            pstmt.setInt(1, produto.getCodigo());
+            PreparedStatement pstmt = conexao.prepareStatement(DELETE_PRODUTO);
+            pstmt.setInt(1, produto.getId());
             pstmt.execute();
 
         } catch (SQLException e) {

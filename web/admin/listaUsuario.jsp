@@ -1,7 +1,7 @@
 <%-- 
     Document   : listaUsuario
     Created on : 13/03/2018, 14:21:34
-    Author     : thays.reis
+    Author     : PC
 --%>
 
 <%@page import="Modelo.Usuario"%>
@@ -75,25 +75,28 @@
             %>
             <table width="100%" border="1">
                 <header class="w3-container w3-xlarge w3-black">
-                    <p class="w3-left">Dados de login</p>
+                    <p class="w3-left">Dados de usuário</p>
                     <p class="w3-right">
                     </p>
                 </header>
                 </br></br>
+
                 <center>
                     <align>
+                        <td> ID </td> 
                         <td>Login </td>
                         <td>Senha</td>
                         <td>Tipo de Perfil</td>
-                        <td>Pessoa</td>
+                        <td>ID Pessoa</td>
                         <td>Alterar </td>
                         <td>Excluir </td>
-                    </align>
+                    </align>                    
                 </center>
+
 
                 </thead>            
                 <tbody>
-                        <%                    for (Usuario u : listaUsuario) {
+                    <%                    for (Usuario u : listaUsuario) {
 
                     %>
                     <tr>
@@ -102,20 +105,20 @@
                         <td> <%= u.getSenha()%> </td>
                         <td> <%= u.getPerfil()%> </td>
                         <td> <%= u.getPessoa().getId()%>  </td>
-                        
-                        
-                         <td> <a href="alterar_usuario.jsp?id=<%=u.getId()%>"class="w3-bar-item w3-button"> * </a> </td>
+
+
+                        <td> <a href="ControleUsuario?acao=AlterarUsuario&id=<%=u.getId()%>"class="w3-bar-item w3-button"> * </a> </td>
                         <td> <a href="ControleUsuario?acao=Excluir&id=<%=u.getId()%>"class="w3-bar-item w3-button"> ✖ </a> </td>
                     </tr>
                     <%
                         } // fim do for
-%> 
+                    %> 
                 </tbody>    
             </table>
 
             </br></br>
             <center>
-                <td><a href="principal.jsp" class="w3-bar-item w3-button"> Voltar </a></td>
+                <td><a href="listas_adm.jsp" class="w3-bar-item w3-button"> Voltar </a></td>
             </center>
             <!-- Footer -->
             <footer class="w3-padding-64 w3-light-grey w3-small w3-center" id="footer">

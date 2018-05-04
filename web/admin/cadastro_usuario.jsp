@@ -1,7 +1,7 @@
 <%-- 
     Document   : cadastro_usuario
     Created on : 14/11/2017, 08:40:46
-    Author     : 11151505692
+    Author     : PC
 --%>
 
 <%@page import="Modelo.Pessoa"%>
@@ -74,14 +74,20 @@
 
 
             <%
-                Pessoa pessoa = (Pessoa) request.getAttribute("pessoa");
-                String msg = (String) request.getAttribute("msg");
+                Pessoa pessoa = null;
+                
+                if ((pessoa = (Pessoa) request.getAttribute("pessoa")) != null);
+                
+                String msg = null;
+                
+                if ((msg = (String) request.getAttribute("msg")) != null);
+                
                 if (msg != null) {
-            %>
+                    %><script>alert("<%=msg%>");</script>
             <font color="blue"><%=msg%></font>
             <%}%>
             <form action="${pageContext.request.contextPath}/ControleUsuario" method="POST">
-                <input type=" hidden" value="<%=pessoa.getId()%>" name = "idPessoa">ID Pessoa</input> 
+                <input type="hidden" value="<%=pessoa.getId()%>" name = "idPessoa">ID Pessoa</input> 
                 <fieldset>
                     <legend>Dados para login </legend>
                     <table cellspacing="10">                     
@@ -117,7 +123,7 @@
                 </fieldset>
                 <button type="submit" class="w3-button w3-black " value="Cadastrar" name="acao">Enviar</button>
             </form></br></br>
-            <td><a href="${pageContext.request.contextPath}/principal.jsp" class="w3-bar-item w3-button"> Voltar </a></td>
+            <td><a href="${pageContext.request.contextPath}/autenticado_adm.jsp" class="w3-bar-item w3-button"> Voltar </a></td>
     </body>
     </br>
 

@@ -7,7 +7,7 @@ package DAO;
 
 /**
  *
- * @author 11151505692
+ * @author PC
  */
 import Modelo.PerfilDeAcesso;
 import Modelo.Pessoa;
@@ -17,6 +17,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import Util.ConectaBanco;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -38,7 +39,7 @@ public class UsuarioDAO {
     private static final String UPDATE_USUARIO = "UPDATE usuario SET  login = ?, senha = ?, perfil = ? WHERE id = ?";
     private static final String DELETE_USUARIO = "DELETE FROM usuario WHERE id = ?";
 
-    public void cadastrarUsuario(Usuario usuario) {
+    public Usuario cadastrarUsuario(Usuario usuario) {
         try {
             PreparedStatement pstmt = conexao.prepareStatement("INSERT INTO usuario VALUES(DEFAULT, ?, ?, ?, ?)");
             pstmt.setString(1, usuario.getLogin());
@@ -58,6 +59,7 @@ public class UsuarioDAO {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return usuario;
     }
 
     public Usuario autenticarUsuario(Usuario usuario) {
@@ -110,7 +112,7 @@ public class UsuarioDAO {
             usuario.getPessoa().setId(rs.getInt("usuario"));
             usuario.setPerfil(PerfilDeAcesso.valueOf(rs.getString("perfil")));
 
-            consultaPorID(usuario);
+            ///consultaPorID(usuario);
             listarUsuario.add(usuario);
 
         }
@@ -118,7 +120,7 @@ public class UsuarioDAO {
         return listarUsuario;
     }
 
-    public Usuario consultaPorID(Usuario usuario) {
+    public Usuario ConsultarUsuario(Usuario usuario) {
 
         try {
 
@@ -129,17 +131,22 @@ public class UsuarioDAO {
             ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
+                
+               
                 usuario.setId(rs.getInt("id"));
                 usuario.setLogin(rs.getString("login"));
                 usuario.setSenha(rs.getString("senha"));
                 usuario.setPerfil(PerfilDeAcesso.valueOf(rs.getString("perfil")));
+                
+                return usuario;
             }
 
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        return usuario;
+        return null;
     }
+    
 
     public void alterar(Usuario usuario) {
         Connection conexao = null;

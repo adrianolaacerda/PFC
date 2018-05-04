@@ -16,45 +16,41 @@ import java.util.List;
 public class Produto {
 
     //declarando atributos 
-    private int codigo;
+    private int id;
     private String nome;
-    private String imagem;
     private Date dataValidade;
-    private TipoProduto tipoPreco;
-    private double preco;
     private int quantidade;
-    private int quantidadeMinima;    
-    private Categoria categoria;     
-    private List<Produto> produtos;// tem muitos
-    
-    public void addProduto(Produto produto){
-        if(produtos == null){
-            this.produtos = new ArrayList<>();
-        }
-    }
+    private double preco;
+    private TipoProduto tipoPreco;
+    private Categoria categoria;
+    private String imagem;
 
+    //construtor vazio
     public Produto() {
     }
+    
+    //construtor 
 
-    public Produto(int codigo, String nome, String imagem, Date dataValidade, TipoProduto tipoPreco, double preco, int quantidade, int quantidadeMinima, Categoria categoria, List<Produto> produtos) {
-        this.codigo = codigo;
+    public Produto(int id, String nome, Date dataValidade, int quantidade, double preco, TipoProduto tipoPreco, Categoria categoria, String imagem) {
+        this.id = id;
         this.nome = nome;
-        this.imagem = imagem;
         this.dataValidade = dataValidade;
-        this.tipoPreco = tipoPreco;
-        this.preco = preco;
         this.quantidade = quantidade;
-        this.quantidadeMinima = quantidadeMinima;
+        this.preco = preco;
+        this.tipoPreco = tipoPreco;
         this.categoria = categoria;
-        this.produtos = produtos;
+        this.imagem = imagem;
+    }
+    
+
+    //getter e setter
+
+    public int getId() {
+        return id;
     }
 
-    public int getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNome() {
@@ -65,36 +61,12 @@ public class Produto {
         this.nome = nome;
     }
 
-    public String getImagem() {
-        return imagem;
-    }
-
-    public void setImagem(String imagem) {
-        this.imagem = imagem;
-    }
-
     public Date getDataValidade() {
         return dataValidade;
     }
 
     public void setDataValidade(Date dataValidade) {
         this.dataValidade = dataValidade;
-    }
-
-    public TipoProduto getTipoPreco() {
-        return tipoPreco;
-    }
-
-    public void setTipoPreco(TipoProduto tipoPreco) {
-        this.tipoPreco = tipoPreco;
-    }
-
-    public double getPreco() {
-        return preco;
-    }
-
-    public void setPreco(double preco) {
-        this.preco = preco;
     }
 
     public int getQuantidade() {
@@ -105,12 +77,20 @@ public class Produto {
         this.quantidade = quantidade;
     }
 
-    public int getQuantidadeMinima() {
-        return quantidadeMinima;
+    public double getPreco() {
+        return preco;
     }
 
-    public void setQuantidadeMinima(int quantidadeMinima) {
-        this.quantidadeMinima = quantidadeMinima;
+    public void setPreco(double preco) {
+        this.preco = preco;
+    }
+
+    public TipoProduto getTipoPreco() {
+        return tipoPreco;
+    }
+
+    public void setTipoPreco(TipoProduto tipoPreco) {
+        this.tipoPreco = tipoPreco;
     }
 
     public Categoria getCategoria() {
@@ -121,13 +101,16 @@ public class Produto {
         this.categoria = categoria;
     }
 
-    public List<Produto> getProdutos() {
-        return produtos;
+    public String getImagem() {
+        return imagem;
     }
 
-    public void setProdutos(List<Produto> produtos) {
-        this.produtos = produtos;
+    public void setImagem(String imagem) {
+        this.imagem = imagem;
     }
+    
+   
+
 
     
 }

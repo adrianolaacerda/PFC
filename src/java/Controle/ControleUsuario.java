@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author 11151505692
+ * @author PC
  */
 @WebServlet(name = "ControleUsuario", urlPatterns = {"/ControleUsuario"})
 public class ControleUsuario extends HttpServlet {
@@ -56,11 +56,16 @@ public class ControleUsuario extends HttpServlet {
                 }
 
                 UsuarioDAO usuarioDAO = new UsuarioDAO();
-                usuarioDAO.cadastrarUsuario(usuario);
-
+                usuario = usuarioDAO.cadastrarUsuario(usuario);
+                
+                if (usuario.getId() != 0) {
+                    request.setAttribute("msg", "cadastrado com sucesso");
+                    request.setAttribute("usuario", usuario);
+                response.sendRedirect(request.getContextPath() + "/admin/sucesso.jsp");
+                }
+                 request.setAttribute("msg", "usuario ja existe");
                 request.setAttribute("usuario", usuario);
-                request.setAttribute("msg", "cadastrado com sucesso");
-                response.sendRedirect(request.getContextPath() + "/home.html");
+                response.sendRedirect(request.getContextPath() + "/admin/cadastro_usuario.jsp");
                 //RequestDispatcher rd = request.getRequestDispatcher("/principal.jsp");
                 //rd.forward(request, response);
 
@@ -74,7 +79,7 @@ public class ControleUsuario extends HttpServlet {
                 response.sendRedirect(request.getContextPath() + "/admin/listaUsuario.jsp");
                 //request.getRequestDispatcher("/admin/listaUsuario.jsp").forward(request, response);
 
-            } else if (acao.equals("ConsultaPorID")) {
+            } else if (acao.equals("ConsultarUsuario")) {
 
                 UsuarioDAO dao = new UsuarioDAO();
                 int id = Integer.parseInt(request.getParameter("id"));
@@ -82,29 +87,30 @@ public class ControleUsuario extends HttpServlet {
                 Usuario usuario = new Usuario();
                 usuario.setId(id);
 
-                dao.consultaPorID(usuario);
+                dao.ConsultarUsuario(usuario);
 
                 request.setAttribute("usuario", usuario);
-                request.getRequestDispatcher("/admin/alterarUsuario.jsp").forward(request, response);
+                request.getRequestDispatcher("/alterar_usuario.jsp").forward(request, response);
 
             } else if (acao.equals("Alterar")) {
                 Usuario usuario = new Usuario();
                 usuario.setId(Integer.parseInt(request.getParameter("id")));
 
-                UsuarioDAO usuarioDAO = new UsuarioDAO();
-                usuarioDAO.alterar(usuario);
-                request.setAttribute("msg", "alterado com sucesso");
-                RequestDispatcher rd = request.getRequestDispatcher("/admin/listaUsuario.jsp");
+                UsuarioDAO usuariodao = new UsuarioDAO();
+                usuariodao.alterar(usuario);
+                request.setAttribute("usuario", usuario);
+                RequestDispatcher rd = request.getRequestDispatcher("/admin/sucesso.jsp");
                 rd.forward(request, response);
 
             } else if (acao.equals("AlterarUsuario")) {
                 Usuario u = new Usuario();
                 u.setId(Integer.parseInt(request.getParameter("id")));
                 UsuarioDAO dao = new UsuarioDAO();
-                u = dao.consultaPorID(u);
-                request.setAttribute("usuario_alterado", u);
-                RequestDispatcher rd = request.getRequestDispatcher("/admin/alterar_usuario.jsp");
-                rd.forward(request, response);
+                u = dao.ConsultarUsuario(u);
+                request.setAttribute("usuario", u);
+                request.getRequestDispatcher("/alterar_usuario.jsp").forward(request, response);
+                RequestDispatcher rd = request.getRequestDispatcher("/admin/sucesso.jsp");
+
             } else if (acao.equals("Excluir")) {
 
                 UsuarioDAO dao = new UsuarioDAO();

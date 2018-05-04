@@ -1,7 +1,7 @@
 <%-- 
     Document   : principal
     Created on : 14/11/2017, 08:42:24
-    Author     : 11151505692
+    Author     : PC
 --%>
 
 <%@page import="Modelo.Usuario"%>
@@ -34,7 +34,6 @@
                 <div id="demoAcc" class="w3-bar-block w3-hide w3-padding-large w3-medium">
                     <a href="${pageContext.request.contextPath}/admin/cadastro_adm.jsp" class="w3-bar-item w3-button">Cadastros</a>
                     <a href="${pageContext.request.contextPath}/admin/listas_adm.jsp" class="w3-bar-item w3-button">Listas</a>
-                    <a href="${pageContext.request.contextPath}/admin/alterar_adm.jsp" class="w3-bar-item w3-button">Alterar</a>
                     <a href="#" class="w3-bar-item w3-button"></a>
                 </div>
             </div>
@@ -70,12 +69,6 @@
                 </p>
             </header>
 
-            <%
-                String msg = (String) request.getAttribute("msg");
-                if (msg != null) {
-            %>
-            <font color="blue"><%=msg%></font>
-            <%}%>
             </br>
             <%
                 //recupera o usuario da sessao

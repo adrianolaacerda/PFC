@@ -7,7 +7,7 @@ package Modelo;
 
 /**
  *
- * @author thays.reis
+ * @author PC
  */
 public enum Categoria {
     

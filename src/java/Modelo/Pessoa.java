@@ -5,6 +5,7 @@
  */
 package Modelo;
 
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +14,7 @@ import java.util.List;
  *
  * @author PC
  */
-public class Pessoa {
+public class Pessoa implements Serializable { // ver para o que serve 
 
     private int id;
     private String nome;
@@ -29,26 +30,7 @@ public class Pessoa {
     private String cidade;
     private String estado;
     private Usuario usuario;
-    private List<Pessoa> pessoas;// tem muitos
-    
-    public void addPessoa (Pessoa pessoa){
-        if(pessoa == null){
-            this.pessoas = new ArrayList<>();
-        }
-    }
 
-    public Pessoa (List<Pessoa> pessoas) {
-        this.pessoas = pessoas;
-    }
-
-    public List<Pessoa> getPessoa() {
-        return pessoas;
-    }
-
-    public void setPessoa(List<Pessoa> pessoas) {
-        this.pessoas = pessoas;
-    }
-    
     //construtor vazio
     
     public Pessoa() {
@@ -179,12 +161,5 @@ public class Pessoa {
         this.estado = estado;
     }
 
-    public List<Pessoa> getPessoas() {
-        return pessoas;
-    }
-
-    public void setPessoas(List<Pessoa> pessoas) {
-        this.pessoas = pessoas;
-    }
     
 }

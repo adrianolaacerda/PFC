@@ -60,7 +60,6 @@ public class ControlePessoa extends HttpServlet {
                 pessoaDAO.cadastrarPessoa(pessoa);
 
                 request.setAttribute("pessoa", pessoa);
-                request.setAttribute("msg", "cadastrado realizado com sucesso!");
                 RequestDispatcher rd = request.getRequestDispatcher("/admin/cadastro_usuario.jsp");
                 rd.forward(request, response);
 
@@ -75,7 +74,7 @@ public class ControlePessoa extends HttpServlet {
                 request.getRequestDispatcher("/admin/listaPessoa.jsp").forward(request, response);
 
                 // CONSULTAR 
-            } else if (acao.equals("ConsultaPorID")) {
+            } else if (acao.equals("consultarPessoa")) {
 
                 PessoaDAO dao = new PessoaDAO();
                 int id = Integer.parseInt(request.getParameter("id"));
@@ -83,10 +82,11 @@ public class ControlePessoa extends HttpServlet {
                 Pessoa pessoa = new Pessoa();
                 pessoa.setId(id);
 
-                dao.consultaPorID(pessoa);
+                dao.consultarPessoa(pessoa);
 
                 request.setAttribute("pessoa", pessoa);
-                request.getRequestDispatcher("/admin/alterarPessoa.jsp").forward(request, response);
+                request.getRequestDispatcher("/admin/alterar_pessoa.jsp").forward(request, response);
+
 
                 // ALTERAR
             } else if (acao.equals("Alterar")) {
@@ -103,25 +103,37 @@ public class ControlePessoa extends HttpServlet {
                 pessoa.setBairro(request.getParameter("txtBairro"));
                 pessoa.setCidade(request.getParameter("txtCidade"));
                 pessoa.setEstado(request.getParameter("txtEstado"));
+                pessoa.setId(Integer.parseInt(request.getParameter("txtID")));
 
                 PessoaDAO pessoaDAO = new PessoaDAO();
-                pessoaDAO.cadastrarPessoa(pessoa);
-                request.setAttribute("msg", "Cadastro alterado com sucesso!");
+                pessoaDAO.alterar(pessoa);
+                request.setAttribute("pessoa", pessoa);
                 RequestDispatcher rd = request.getRequestDispatcher("/admin/sucesso.jsp");
                 rd.forward(request, response);
 
+                // AlterarPessoa
+                } else if (acao.equals("AlterarPessoa")) {
+                Pessoa p = new Pessoa();
+                p.setId(Integer.parseInt(request.getParameter("id")));
+                PessoaDAO dao = new PessoaDAO();
+                p = dao.consultarPessoa(p);
+                request.setAttribute("pessoa", p);
+                request.getRequestDispatcher("/admin/alterar_pessoa.jsp").forward(request, response);
+                RequestDispatcher rd = request.getRequestDispatcher("/admin/sucesso.jsp");
+        
+                
                 // EXCLUIR
             } else if (acao.equals("Excluir")) {
 
                 PessoaDAO dao = new PessoaDAO();
-                int id = Integer.parseInt(request.getParameter("id"));
+                int id = Integer.parseInt(request.getParameter("txtid"));
 
                 Pessoa pessoa = new Pessoa();
                 pessoa.setId(id);
 
                 dao.excluir(pessoa);
 
-                out.println("Cadastrado excluído ");
+                out.println("Cadastro excluído ");
 
                 RequestDispatcher rd = request.getRequestDispatcher("ControlePessoa?acao=Listar");
                 rd.forward(request, response);
@@ -129,6 +141,7 @@ public class ControlePessoa extends HttpServlet {
             }
 
         } catch (Exception erro) {
+            erro.printStackTrace();
             RequestDispatcher rd = request.getRequestDispatcher("/erro.jsp");
             request.setAttribute("erro", erro);
             rd.forward(request, response);

@@ -21,6 +21,9 @@
     <style>
         .w3-sidebar a {font-family: "Roboto", sans-serif}
         body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
+        #scroll {            
+            overflow:auto;
+        }
     </style>
     <body class="w3-content" style="max-width:1200px">
 
@@ -67,68 +70,70 @@
                 ArrayList<Pessoa> listaPessoas = (ArrayList<Pessoa>) request.getSession().getAttribute("listaPessoa");
 
             %>
-            
-             <table width="100%" border="1">
-                <header class="w3-container w3-xlarge w3-black">
-                    <p class="w3-left">Dados Pessoais</p>
-                    <p class="w3-right">
-                    </p>
-                </header>
-                </br></br>
-                <center>
-                    <align>
-                        <td> ID </td>
-                        <td>Nome</td>
-                        <td>CPF</td>
-                        <td>RG</td>
-                        <td>Data Nascimento</td>
-                        <td>E-mail</td>
-                        <td>Logradouro</td>
-                        <td>Número</td>
-                        <td>CEP</td>
-                        <td>Bairro</td>
-                        <td>Cidade</td>
-                        <td>Estado</td>
-                        <td>Telefone</td>
-                        <td>Alterar </td>
-                        <td>Excluir </td>
-                    </align>
-                </center>
-                
-                </thead>            
-                <tbody>
-                    <%                    for (Pessoa pessoa : listaPessoas) {
 
-                    %>
-                    
-                    <tr>
-                        <td> <%= pessoa.getId()%></td>
-                        <td> <%= pessoa.getNome()%></td>
-                        <td> <%= pessoa.getCpf()%> </td>
-                        <td> <%= pessoa.getRg()%> </td>
-                        <td> <%= pessoa.getDataNasc()%> </td>
-                        <td> <%= pessoa.getEmail()%> </td>
-                        <td> <%= pessoa.getTelefone()%>   </td>
-                        <td> <%= pessoa.getId()%></td>
-                        <td> <%= pessoa.getLogradouro()%>   </td>
-                        <td> <%= pessoa.getNumero()%>   </td>
-                        <td> <%= pessoa.getCep()%>   </td>
-                        <td> <%= pessoa.getBairro()%>   </td>
-                        <td> <%= pessoa.getCidade()%>   </td>
-                        <td> <%= pessoa.getEstado()%>   </td>
-                        
-                        <td> <a href="ControlePessoa?acao=consultaPorID&id=<%=pessoa.getId()%>"class="w3-bar-item w3-button"> * </a> </td>
-                        <td> <a href="ControlePessoa?acao=Excluir&id=<%=pessoa.getId()%>"class="w3-bar-item w3-button"> ✖ </a> </td>
-                      </tr>
-                    <%
+            <div id="scroll">
+                <table width="100%" border="1">
+                    <header class="w3-container w3-xlarge w3-black">
+                        <p class="w3-left">Dados de Pessoas</p>
+                        <p class="w3-right">
+                        </p>
+                    </header>
+                    </br></br>
+                    <center>
+                        <align>
+                            <td> ID </td>
+                            <td>Nome</td>
+                            <td>CPF</td>
+                            <td>RG</td>
+                            <td>Data Nascimento</td>
+                            <td>E-mail</td>
+                            <td>Logradouro</td>
+                            <td>Número</td>
+                            <td>CEP</td>
+                            <td>Bairro</td>
+                            <td>Cidade</td>
+                            <td>Estado</td>
+                            <td>Telefone</td>
+                            <td>Alterar </td>
+                            <td>Excluir </td>
+                        </align>
+                    </center>
+
+                    </thead>            
+                    <tbody>
+                        <%                    for (Pessoa pessoa : listaPessoas) {
+
+                        %>
+
+                        <tr>
+                            <td> <%= pessoa.getId()%></td>
+                            <td> <%= pessoa.getNome()%></td>
+                            <td> <%= pessoa.getCpf()%> </td>
+                            <td> <%= pessoa.getRg()%> </td>
+                            <td> <%= pessoa.getDataNasc()%> </td>
+                            <td> <%= pessoa.getEmail()%> </td>
+                            <td> <%= pessoa.getTelefone()%>   </td>
+                            <td> <%= pessoa.getId()%></td>
+                            <td> <%= pessoa.getLogradouro()%>   </td>
+                            <td> <%= pessoa.getNumero()%>   </td>
+                            <td> <%= pessoa.getCep()%>   </td>
+                            <td> <%= pessoa.getBairro()%>   </td>
+                            <td> <%= pessoa.getCidade()%>   </td>
+                            <td> <%= pessoa.getEstado()%>   </td>
+
+                            <td> <a href="ControlePessoa?acao=AlterarPessoa&id=<%=pessoa.getId()%>"class="w3-bar-item w3-button"> ✖ </a> </td>
+                            <td> <a href="ControlePessoa?acao=Excluir&id=<%=pessoa.getId()%>"class="w3-bar-item w3-button"> ✖ </a> </td>
+                        </tr>
+                        <%
                         } // fim do for
 %> 
-                </tbody>    
-            </table>
+                    </tbody>    
+                </table>
+            </div>
 
             </br></br>
             <center>
-                <td><a href="principal.jsp" class="w3-bar-item w3-button"> Voltar </a></td>
+               <td><a href="admin/listas_adm.jsp" class="w3-bar-item w3-button"> Voltar </a></td>
             </center>
             <!-- Footer -->
             <footer class="w3-padding-64 w3-light-grey w3-small w3-center" id="footer">

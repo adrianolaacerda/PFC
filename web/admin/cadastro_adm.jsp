@@ -1,7 +1,7 @@
 <%-- 
     Document   : principal
     Created on : 14/11/2017, 08:42:24
-    Author     : 11151505692
+    Author     : PC
 --%>
 
 <%@page import="Modelo.Usuario"%>
@@ -88,9 +88,9 @@
 
             </br>   
             <center>
-                <a href="./cadastro_pessoa.jsp" class="w3-bar-item w3-button">Cadastro de clientes</a>   
-                <a href="./cadastro_usuario.jsp" class="w3-bar-item w3-button">Cadastro de usuários</a>               
-                <a href="./cadastro_produto.jsp" class="w3-bar-item w3-button">Cadastro de produtos</a></br> 
+                <a href="./cadastro_pessoa.jsp" class="w3-bar-item w3-button">Cadastro de Pessoas</a>   
+                         
+                <a href="./cadastro_produto.jsp" class="w3-bar-item w3-button">Cadastro de Produtos</a></br> 
             </center>
             </br> </br> 
             <a href="autenticado_adm.jsp" class="w3-bar-item w3-button"> Voltar </a><br/>

@@ -1,7 +1,7 @@
 <%-- 
     Document   : cadastro_usuario
     Created on : 14/11/2017, 08:40:46
-    Author     : 11151505692
+    Author     : PC
 --%>
 
 <%@page import="Modelo.Pessoa"%>
@@ -74,19 +74,15 @@
 
 
             <%
-                Usuario usuario = new Usuario();
-                usuario.setId(Integer.parseInt(request.getParameter("id")));
+                Usuario usuario = (Usuario) request.getAttribute("usuario");
+
                 String msg = (String) request.getAttribute("msg");
-                
-                if (request.getAttribute("usuario_alterado") != null) {
-                    usuario = (Usuario) request.getAttribute("usuario_alterado");
-                }
-                
+
                 if (msg != null) {
             %>
             <font color="blue"><%=msg%></font>
             <%}%>
-            <form action="${pageContext.request.contextPath}/ControleUsuario" method="POST">
+            <form action="ControleUsuario" method="POST">
                 <fieldset>
                     <legend>Dados para login </legend>
                     <table cellspacing="10">                     
@@ -95,8 +91,8 @@
                                 <label for="login">Login </label>
                             </td>
                             <td align="left">
-                                <input type="text" name="id" id="id" style="display:none;" value="<%=usuario.getId()%>"/>
-                                <input type="text" name="txtLogin" size="15" maxlength="15" value="<%=usuario.getLogin()%>"> 
+                                <input type="text" name="id" id="id" style="display:none;" value=<%=usuario.getId()%>>
+                                <input type="text" name="txtLogin" size="15" maxlength="15" value=<%=usuario.getLogin()%>>
                             </td>
                         </tr>
 
@@ -105,7 +101,7 @@
                                 <label for="senha">Senha </label>
                             </td>
                             <td align="left">
-                                <input type="password" name="txtSenha" size="15" maxlength="15" value="<%=usuario.getSenha()%>"> 
+                                <input type="password" name="txtSenha" size="15" maxlength="15" value=<%=usuario.getSenha()%>> 
                             </td>
                         </tr>
 
@@ -113,7 +109,7 @@
                             <label for="perfil">Perfil</label >
                         </td>
                         <td align="left">
-                            <select name="optPerfil"> 
+                            <select name="optPerfil" value=<%=usuario.getPerfil()%>>> 
                                 <option value="select">Selecionar</option> 
                                 <option value="cliente">Cliente</option> 
                                 <option value="funcionario">Funcionário</option> 
@@ -123,7 +119,7 @@
                 </fieldset>
                 <button type="submit" class="w3-button w3-black " value="Alterar" name="acao">Enviar</button>
             </form></br></br>
-            <td><a href="${pageContext.request.contextPath}/principal.jsp" class="w3-bar-item w3-button"> Voltar </a></td>
+            <td><a href="${pageContext.request.contextPath}/listas_adm.jsp" class="w3-bar-item w3-button"> Voltar </a></td>
     </body>
     </br>
 

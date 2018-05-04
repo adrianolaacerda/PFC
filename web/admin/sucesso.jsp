@@ -1,10 +1,10 @@
 <%-- 
     Document   : sucesso
     Created on : 26/02/2018, 16:07:52
-    Author     : thays.reis
+    Author     : PC
 --%>
 
-<%@page import="Model.Usuario"%>
+<%@page import="Modelo.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -66,37 +66,18 @@
 
 
             <header class="w3-container w3-xlarge w3-black">
-                <p class="w3-left">Cadastro</p>
+                <p class="w3-left"></p>
                 <p class="w3-right">
                 </p>
             </header>
 
-            <%
-                String msg = (String) request.getAttribute("msg");
-                if (msg != null) {
-            %>
-            <font color="blue"><%=msg%></font>
-            <%}%>
-            </br>
-            <%
-                //recupera o usuario da sessao
-                Usuario usuario = (Usuario) session.getAttribute("usuarioAutenticado");
-                if (usuario != null) {
-            %>
-            <center>
-            <h2><b>Bem-vindo(a), <%=usuario.getLogin()%></b></h2>
-            <%}%>
+           
             
-            <p>Sucesso!!!!!!</p>
-                <a href="admin/cadastro_usuario.jsp" class="w3-bar-item w3-button">Cadastro Usuario</a></br>                
-                <a href="admin/cadastro_produto.jsp" class="w3-bar-item w3-button">Cadastro Produto</a></br> 
-                <a href="ControleUsuario?acao=Listar" class="w3-bar-item w3-button"> Listar Usuario </a><br/>
-                <a href="ControleProduto?acao=Listar" class="w3-bar-item w3-button"> Listar Produto </a><br/>
-                <a href="ControleEndereco?acao=Listar" class="w3-bar-item w3-button"> Listar Enderecos </a><br/>
-                <a href="ControleAcesso?acao=Sair" class="w3-bar-item w3-button"> Logout </a><br/>
+           <center>
+                <h1><b>Sucesso!</b></h1>
+            </center>
                 
-                <a href="ControleAcesso?acao=Sair" class="w3-bar-item w3-button"> Logout </a>
-                 <td><a href="principal.jsp" class="w3-bar-item w3-button"> Voltar </a></td>
+            <td><a href="autenticado_adm.jsp" class="w3-bar-item w3-button"> Voltar </a></td>
             </br>
             </center>
             

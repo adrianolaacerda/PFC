@@ -1,7 +1,7 @@
 <%-- 
     Document   : cadastro_produto
     Created on : 21/02/2018, 15:28:44
-    Author     : thays.reis
+    Author     : PC
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -24,7 +24,7 @@
         <nav class="w3-sidebar w3-bar-block w3-light-grey w3-collapse w3-top" style="z-index:3;width:250px" id="mySidebar">
             <div class="w3-container w3-display-container w3-padding-16">
                 <i onclick="w3_close()" class="fa fa-remove w3-hide-large w3-button w3-display-topright"></i>
-               <a href="home.html" class="w3-wide"> <h3><b>IFruit</b></h3> </a>
+                <a href="home.html" class="w3-wide"> <h3><b>IFruit</b></h3> </a>
             </div>
             <div class="w3-padding-64 w3-large w3-text-grey" style="font-weight:bold">
                 <a href="../home.html" class="w3-bar-item w3-button"> Login </a>
@@ -65,7 +65,7 @@
 
 
             <header class="w3-container w3-xlarge w3-black">
-                <p class="w3-left">Cadastro</p>
+                <p class="w3-left">Cadastro de Produtos</p>
                 <p class="w3-right">
                 </p>
             </header>
@@ -77,130 +77,182 @@
             %>
             <font color="blue"><%=msg%></font>
             <%}%>
-            <center>
-             <form action="../ControleProduto" method="POST">
-                    <p><input  type="text" placeholder="Nome" name="txtNome" required></p>
-                    <p><input  type="file" placeholder="Imagem" name="flImagem" required></p> 
-                    <p><input  type="date" placeholder="Data Validade" name="txtDValidade" required></p>
-                    Tipo Preco <select name="optTPreco">
-                                <option>Selecionar</option>
-                                <option>Duzia</option>
-                                <option>Unidade</option>
-                                <option>Peso</option>
-                            </select><br/></br>
-                    <p><input  type="text" placeholder="Preco" name="txtPreco" required></p>   
-                    <p><input  type="text" placeholder="Quantidade" name="txtQuantidade" required></p>
-                    <p><input  type="text" placeholder="QuantidadeMinima" name="txtQMinima" required></p>
-                     Categoria <select name="optCategoria">
-                                <option>Selecionar</option>
-                                <option>Fruta</option>
-                                <option>Verdura</option>
-                                <option>Legumes</option>
-                            </select><br/></br>
-                   
-                    
-                                                
-                                
-                    
-                 <button type="submit" class="w3-button w3-black " value="Cadastrar" name="acao">Enviar</button>
-                
-                </form></br></br>
-                <td><a href="../principal.jsp" class="w3-bar-item w3-button"> Voltar </a></td>
-                </body>
-                </br>
-            </center>
 
-            <!-- Footer -->
-            <footer class="w3-padding-64 w3-light-grey w3-small w3-center" id="footer">
-                <div class="w3-row-padding">
-                    <div class="w3-col s4">
+            <form action="../ControleProduto" method="POST">
+                <fieldset>
+                    <legend>Dados de Produtos</legend>
+                    <table cellspacing="10">
+                        <tr>
+                            <td>
+                                <label for="nome">Nome </label>
+                            </td>
+                            <td align="left">
+                                <input  type="text" name="txtNome">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="DValidade">Data de validade </label>
+                            </td>
+                            <td align="left">
+                                <input  type="date" name="txtDValidade">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="Quantidade">Quantidade</label>
+                            </td>
+                            <td align="left">
+                                <input type="text" name="txtQuantidade">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="Preco">Preço</label>
+                            </td>
+                            <td align="left">
+                                <input  type="text" name="txtPreco" required>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="medida">Tipo de medida</label>
+                            </td>
+                            <td align="left">
+                                <select name="optTPreco"> 
+                                    <option>Selecionar</option>
+                                    <option>Duzia</option>
+                                    <option>Unidade</option>
+                                    <option>Peso</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="categoria">Categoria</label>
+                            </td>
+                            <td align="left">
+                                <select name="optCategoria">
+                                    <option>Selecionar</option>
+                                    <option>Fruta</option>
+                                    <option>Verdura</option>
+                                    <option>Legumes</option>
+                                </select>
+                            </td>
+                        </tr
+                        <tr>
+                            <td>
+                                <label for="Imagem">Imagem</label>
+                            </td>
+                            <td align="left">
+                                <input  type="file" name="Imagem" required>
+                            </td>
+                        </tr>
 
-                        <h4>Contato</h4>
-                        <p>Perguntas? Continue.</p>
-                        <form action="/action_page.php" target="_blank">
-                            <p><input class="w3-input w3-border" type="text" placeholder="Nome" name="Nome" required></p>
-                            <p><input class="w3-input w3-border" type="text" placeholder="Email" name="Email" required></p>
-                            <p><input class="w3-input w3-border" type="text" placeholder="Assunto" name="Assunto" required></p>
-                            <p><input class="w3-input w3-border" type="text" placeholder="Mensagem" name="Mensagem" required></p>
-                            <button type="submit" class="w3-button w3-block w3-black">Enviar</button>
+                    </table>
 
-                        </form>
-                    </div>
+                </fieldset>
+                </br></br>
 
-                    <div class="w3-col s4">
-                        <h4>Sobre</h4>
-                        <p><a href="#">Sobre nós</a></p>
-                        <p><a href="#">Encontre sua loja</a></p>
-                        <p><a href="#">Envio</a></p>
-                        <p><a href="#">Pagamentos</a></p>
-                        <p><a href="#">Ajuda</a></p>
-                    </div>
+                <button type="submit" class="w3-button w3-black " value="CadastrarProduto" name="acao">Enviar</button>
 
-                    <div class="w3-col s4 w3-justify">
-                        <h4>Loja</h4>
-                        <p><i class="fa fa-fw fa-map-marker"></i><p><a href="encontre_loja.jsp"> Companhia IFruit</a></p>
-                        <p><i class="fa fa-fw fa-phone"></i> (011) 4728-6594</p>
-                        <p><i class="fa fa-fw fa-envelope"></i> ifruit@gmail.com</p>
-                        <h4>Aceitamos</h4>
-                        <p><i class="fa fa-fw fa-cc-amex"></i> Cartões de Debíto</p>
-                        <p><i class="fa fa-fw fa-credit-card"></i> Cartões de Crédito</p>
-                        <br>
-                        <i class="fa fa-facebook-official w3-hover-opacity w3-large"></i>
-                        <i class="fa fa-instagram w3-hover-opacity w3-large"></i>
-                        <i class="fa fa-snapchat w3-hover-opacity w3-large"></i>
-                        <i class="fa fa-pinterest-p w3-hover-opacity w3-large"></i>
-                        <i class="fa fa-twitter w3-hover-opacity w3-large"></i>
-                        <i class="fa fa-linkedin w3-hover-opacity w3-large"></i>
-                    </div>
-                </div>
-            </footer>
-
-            <div class="w3-black w3-center w3-padding-24">Feito por <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">Grupo Ifruit</a></div>
-
-            <!-- End page content -->
-        </div>
-
-        <!-- Newsletter Modal -->
-        <div id="newsletter" class="w3-modal">
-            <div class="w3-modal-content w3-animate-zoom" style="padding:32px">
-                <div class="w3-container w3-white w3-center">
-                    <i onclick="document.getElementById('newsletter').style.display = 'none'" class="fa fa-remove w3-right w3-button w3-transparent w3-xxlarge"></i>
-                    <h2 class="w3-wide">Promoções</h2>
-                    <p>Junte-se à nossa lista de correspondência para receber atualizações sobre novos produtos e ofertas especiais.</p>
-                    <p><input class="w3-input w3-border" type="text" placeholder="Entre com o e-mail"></p>
-                    <button type="button" class="w3-button w3-padding-large w3-red w3-margin-bottom" onclick="document.getElementById('newsletter').style.display = 'none'">Enviar</button>
-                </div>
-            </div>
-        </div>
-
-        <script>
-            // Accordion 
-            function myAccFunc() {
-                var x = document.getElementById("demoAcc");
-                if (x.className.indexOf("w3-show") == -1) {
-                    x.className += " w3-show";
-                } else {
-                    x.className = x.className.replace(" w3-show", "");
-                }
-            }
-
-            // Click on the "Jeans" link on page load to open the accordion for demo purposes
-            document.getElementById("myBtn").click();
-
-
-            // Script to open and close sidebar
-            function w3_open() {
-                document.getElementById("mySidebar").style.display = "block";
-                document.getElementById("myOverlay").style.display = "block";
-            }
-
-            function w3_close() {
-                document.getElementById("mySidebar").style.display = "none";
-                document.getElementById("myOverlay").style.display = "none";
-            }
-        </script>
-
+            </form></br></br>
+            <td><a href="cadastro_adm.jsp" class="w3-bar-item w3-button"> Voltar </a></td>
     </body>
+    </br>
+</center>
+
+<!-- Footer -->
+<footer class="w3-padding-64 w3-light-grey w3-small w3-center" id="footer">
+    <div class="w3-row-padding">
+        <div class="w3-col s4">
+
+            <h4>Contato</h4>
+            <p>Perguntas? Continue.</p>
+            <form action="/action_page.php" target="_blank">
+                <p><input class="w3-input w3-border" type="text" placeholder="Nome" name="Nome" required></p>
+                <p><input class="w3-input w3-border" type="text" placeholder="Email" name="Email" required></p>
+                <p><input class="w3-input w3-border" type="text" placeholder="Assunto" name="Assunto" required></p>
+                <p><input class="w3-input w3-border" type="text" placeholder="Mensagem" name="Mensagem" required></p>
+                <button type="submit" class="w3-button w3-block w3-black">Enviar</button>
+
+            </form>
+        </div>
+
+        <div class="w3-col s4">
+            <h4>Sobre</h4>
+            <p><a href="#">Sobre nós</a></p>
+            <p><a href="#">Encontre sua loja</a></p>
+            <p><a href="#">Envio</a></p>
+            <p><a href="#">Pagamentos</a></p>
+            <p><a href="#">Ajuda</a></p>
+        </div>
+
+        <div class="w3-col s4 w3-justify">
+            <h4>Loja</h4>
+            <p><i class="fa fa-fw fa-map-marker"></i><p><a href="encontre_loja.jsp"> Companhia IFruit</a></p>
+            <p><i class="fa fa-fw fa-phone"></i> (011) 4728-6594</p>
+            <p><i class="fa fa-fw fa-envelope"></i> ifruit@gmail.com</p>
+            <h4>Aceitamos</h4>
+            <p><i class="fa fa-fw fa-cc-amex"></i> Cartões de Debíto</p>
+            <p><i class="fa fa-fw fa-credit-card"></i> Cartões de Crédito</p>
+            <br>
+            <i class="fa fa-facebook-official w3-hover-opacity w3-large"></i>
+            <i class="fa fa-instagram w3-hover-opacity w3-large"></i>
+            <i class="fa fa-snapchat w3-hover-opacity w3-large"></i>
+            <i class="fa fa-pinterest-p w3-hover-opacity w3-large"></i>
+            <i class="fa fa-twitter w3-hover-opacity w3-large"></i>
+            <i class="fa fa-linkedin w3-hover-opacity w3-large"></i>
+        </div>
+    </div>
+</footer>
+
+<div class="w3-black w3-center w3-padding-24">Feito por <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">Grupo Ifruit</a></div>
+
+<!-- End page content -->
+</div>
+
+<!-- Newsletter Modal -->
+<div id="newsletter" class="w3-modal">
+    <div class="w3-modal-content w3-animate-zoom" style="padding:32px">
+        <div class="w3-container w3-white w3-center">
+            <i onclick="document.getElementById('newsletter').style.display = 'none'" class="fa fa-remove w3-right w3-button w3-transparent w3-xxlarge"></i>
+            <h2 class="w3-wide">Promoções</h2>
+            <p>Junte-se à nossa lista de correspondência para receber atualizações sobre novos produtos e ofertas especiais.</p>
+            <p><input class="w3-input w3-border" type="text" placeholder="Entre com o e-mail"></p>
+            <button type="button" class="w3-button w3-padding-large w3-red w3-margin-bottom" onclick="document.getElementById('newsletter').style.display = 'none'">Enviar</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Accordion 
+    function myAccFunc() {
+        var x = document.getElementById("demoAcc");
+        if (x.className.indexOf("w3-show") == -1) {
+            x.className += " w3-show";
+        } else {
+            x.className = x.className.replace(" w3-show", "");
+        }
+    }
+
+    // Click on the "Jeans" link on page load to open the accordion for demo purposes
+    document.getElementById("myBtn").click();
+
+
+    // Script to open and close sidebar
+    function w3_open() {
+        document.getElementById("mySidebar").style.display = "block";
+        document.getElementById("myOverlay").style.display = "block";
+    }
+
+    function w3_close() {
+        document.getElementById("mySidebar").style.display = "none";
+        document.getElementById("myOverlay").style.display = "none";
+    }
+</script>
+
+</body>
 </html>
 
 

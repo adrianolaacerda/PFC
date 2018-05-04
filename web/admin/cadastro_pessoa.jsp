@@ -211,7 +211,7 @@
                  <button type="submit" class="w3-button w3-black " value="CadastrarPessoa" name="acao">Enviar</button>
                 
                 </form></br></br>
-                 <td><a href="../principal.jsp" class="w3-bar-item w3-button"> Voltar </a></td>
+                 <td><a href="cadastro_adm.jsp" class="w3-bar-item w3-button"> Voltar </a></td>
                 </body>
             </center>
             </br>

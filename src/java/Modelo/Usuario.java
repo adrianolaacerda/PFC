@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  *
- * @author 11151505692
+ * @author PC
  */
 public class Usuario {
 
@@ -19,26 +19,7 @@ public class Usuario {
     private String senha;
     private PerfilDeAcesso perfil;
     private Pessoa pessoa;
-    private List<Usuario> usuarios;// tem muitos
     
-    public void addUsuario(Usuario usuario){
-        if(usuarios == null){
-            this.usuarios = new ArrayList<>();
-        }
-    }
-
-    public Usuario(List<Usuario> usuarios) {
-        this.usuarios = usuarios;
-    }
-
-    public List<Usuario> getUsuarios() {
-        return usuarios;
-    }
-
-    public void setUsuarios(List<Usuario> usuarios) {
-        this.usuarios = usuarios;
-    }
-
     //construtor vazio
     public Usuario() {
     }
@@ -51,7 +32,6 @@ public class Usuario {
         this.perfil = perfil;
         this.pessoa = pessoa;
     }
-    
     
     // getter e setter
         

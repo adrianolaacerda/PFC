@@ -7,7 +7,7 @@ package Modelo;
 
 /**
  *
- * @author 11151505692
+ * @author PC
  */
 
 public enum PerfilDeAcesso {

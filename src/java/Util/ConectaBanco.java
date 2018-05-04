@@ -22,6 +22,8 @@ public class ConectaBanco {
             Class.forName("org.postgresql.Driver");
             //cria um objeto de conexao com um banco especificado no caminho... 
             conexao = DriverManager.getConnection("jdbc:postgresql://localhost:5432/pfc", "postgres", "postgres");
+            
+            conexao.setAutoCommit(false);
         } catch (ClassNotFoundException erro1) {
             throw new RuntimeException(erro1);
         } catch (SQLException erro2) {

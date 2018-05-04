@@ -1,10 +1,10 @@
 <%-- 
-    Document   : cadastro_pessoa
-    Created on : 12/04/2018, 23:19:02
+    Document   : cadastro_produto
+    Created on : 21/02/2018, 15:28:44
     Author     : PC
 --%>
-
-<%@page import="Modelo.Pessoa"%>
+<%@page import="Modelo.Produto"%>
+<%@page import="Modelo.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -59,34 +59,40 @@
             <div class="w3-hide-large" style="margin-top:83px"></div>
 
 
+
+            <!-- Image header -->
+
+
+
+
             <header class="w3-container w3-xlarge w3-black">
-                <p class="w3-left">Alterar</p>
+                <p class="w3-left">Cadastro de Produtos</p>
                 <p class="w3-right">
                 </p>
             </header>
+
+
             <%
-                 Pessoa pessoa = (Pessoa) request.getAttribute("pessoa");
+                Produto produto = (Produto) request.getAttribute("produto");
 
                 String msg = (String) request.getAttribute("msg");
 
                 if (msg != null) {
             %>
+
             <font color="blue"><%=msg%></font>
             <%}%>
 
-            <%--script>alert("<%=pessoa.getId()%>");</script--%>
-            
-            <!-- FORM CADASTRO -->
-            <form action="ControlePessoa" method="POST">
+            <form action="ControleProduto" method="POST">
                 <fieldset>
-                    <legend>Dados Pessoais</legend>
-                    <table cellspacing="4">
+                    <legend>Dados de Produtos</legend>
+                    <table cellspacing="10">
                         <tr>
                             <td>
                                 <label for="id ">ID </label>
                             </td>
                             <td align="left">
-                                <input type="text" name="txtID" value="<%=pessoa.getId()%>">
+                                <input type="hidden" name="txtID" value=<%=produto.getId()%>>
                             </td>
                         </tr>
                         <tr>
@@ -94,143 +100,82 @@
                                 <label for="nome">Nome </label>
                             </td>
                             <td align="left">
-                                <input type="text" name="txtNome" value=<%=pessoa.getNome()%>>
+                                <input  type="text" name="txtNome" value=<%=produto.getNome()%>>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <label for="cpf">CPF </label>
+                                <label for="DValidade">Data de validade </label>
                             </td>
                             <td align="left">
-                                <input type="text" name="txtCPF" size="13" maxlength="15" value=<%=pessoa.getCpf()%>>
+                                <input  type="date" name="txtDValidade" value=<%=produto.getDataValidade() %>>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <label for="rg">RG</label>
+                                <label for="Quantidade">Quantidade</label>
                             </td>
                             <td align="left">
-                                <input type="text" name="txtRG" size="10" maxlength="15" value=<%=pessoa.getRg()%>> 
+                                <input type="text" name="txtQuantidade" value=<%=produto.getQuantidade() %>>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <label>Data de Nascimento </label>
+                                <label for="Preco">Preço</label>
                             </td>
                             <td align="left">
-                                <input type="date" name="txtdataNasc" value=<%=pessoa.getDataNasc()%>>
+                                <input  type="text" name="txtPreco" required value=<%=produto.getPreco() %>>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="medida">Tipo de medida</label>
+                            </td>
+                            <td align="left">
+                                <select name="optTPreco" value=<%=produto.getTipoPreco() %>>
+                                    <option>Selecionar</option>
+                                    <option>Duzia</option>
+                                    <option>Unidade</option>
+                                    <option>Peso</option>
+                                </select>
+                            </td>
+                        </tr>
+                       
+                        <tr>
+                            <td>
+                                <label for="categoria">Categoria</label>
+                            </td>
+                            <td align="left">
+                                <select name="optCategoria" value=<%=produto.getCategoria() %>>
+                                    <option>Selecionar</option>
+                                    <option>Fruta</option>
+                                    <option>Verdura</option>
+                                    <option>Legumes</option>
+                                </select>
+                            </td>
+                        </tr
+                        <tr>
+                            <td>
+                                <label for="Imagem">Imagem</label>
+                            </td>
+                            <td align="left">
+                                <input  type="file" name="Imagem" required value=<%=produto.getImagem()%>>
                             </td>
                         </tr>
 
-                        <tr>
-                            <td>
-                                <label>E-mail</label>
-                            </td>
-                            <td align="left">
-                                <input type="text" name="txtEmail" size="40" maxlength="40" value=<%=pessoa.getEmail()%>> 
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label>Telefone</label>
-                            </td>
-                            <td align="left">
-                                <input type="text" name="txtTelefone" size="30" maxlength="20" value=<%=pessoa.getTelefone()%>> 
-                            </td>
-                        </tr>
-
-                        <legend>Dados de Endereço</legend>
-                        <table cellspacing="10">
-                            <tr>
-                                <td>
-                                    <label for="Logradouro">Logradouro</label>
-                                </td>
-                                <td align="left">
-                                    <input type="text" name="txtLogradouro" value=<%=pessoa.getLogradouro()%>>
-                                </td>
-                                <td>
-                                    <label for="numero">Número</label>
-                                </td>
-                                <td align="left">
-                                    <input type="text" name="txtNumero" size="5" value=<%=pessoa.getNumero()%>>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <label for="cep">CEP </label>
-                                </td>
-                                <td align="left">
-                                    <input type="text" name="txtCEP" size="10" maxlength="10" value=<%=pessoa.getCep()%>>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <label for="bairro">Bairro </label>
-                                </td>
-                                <td align="left">
-                                    <input type="text" name="txtBairro" value=<%=pessoa.getBairro()%>>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <label for="cidade">Cidade </label>
-                                </td>
-                                <td align="left">
-                                    <input type="text" name="txtCidade" value=<%=pessoa.getCidade()%>>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <label for="estado">Estado</label>
-                                </td>
-                                <td align="left">
-                                    <select name="txtEstado" value=<%=pessoa.getEstado()%>>
-                                        <option value="ac">Selecionar</option> 
-                                        <option value="ac">Acre</option> 
-                                        <option value="al">Alagoas</option> 
-                                        <option value="am">Amazonas</option> 
-                                        <option value="ap">Amapá</option> 
-                                        <option value="ba">Bahia</option> 
-                                        <option value="ce">Ceará</option> 
-                                        <option value="df">Distrito Federal</option> 
-                                        <option value="es">Espírito Santo</option> 
-                                        <option value="go">Goiás</option> 
-                                        <option value="ma">Maranhão</option> 
-                                        <option value="mt">Mato Grosso</option> 
-                                        <option value="ms">Mato Grosso do Sul</option> 
-                                        <option value="mg">Minas Gerais</option> 
-                                        <option value="pa">Pará</option> 
-                                        <option value="pb">Paraíba</option> 
-                                        <option value="pr">Paraná</option> 
-                                        <option value="pe">Pernambuco</option> 
-                                        <option value="pi">Piauí</option> 
-                                        <option value="rj">Rio de Janeiro</option> 
-                                        <option value="rn">Rio Grande do Norte</option> 
-                                        <option value="ro">Rondônia</option> 
-                                        <option value="rs">Rio Grande do Sul</option> 
-                                        <option value="rr">Roraima</option> 
-                                        <option value="sc">Santa Catarina</option> 
-                                        <option value="se">Sergipe</option> 
-                                        <option value="sp">São Paulo</option> 
-                                        <option value="to">Tocantins</option> 
-                                    </select>
-                                </td>
-                            </tr>
-                        </table>
+                    </table>
 
                 </fieldset>
+                </br></br>
 
-                <center>
-
-                    <button type="submit" class="w3-button w3-black " value="Alterar" name="acao">Enviar</button>
-
+                
+                <button type="submit" class="w3-button w3-black " value="Alterar" name="acao" >Enviar</button>
 
             </form></br></br>
-            <td><a href="${pageContext.request.contextPath}admin/listas_adm.jsp" class="w3-bar-item w3-button"> Voltar </a></td>
+            <td><a href="${pageContext.request.contextPath}/listas_adm.jsp" class="w3-bar-item w3-button"> Voltar </a></td>
     </body>
+    </br>
 </center>
-</br>
-
 
 <!-- Footer -->
 <footer class="w3-padding-64 w3-light-grey w3-small w3-center" id="footer">
@@ -326,6 +271,3 @@
 </html>
 
 
-
-
-</html>
