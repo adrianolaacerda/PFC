@@ -20,7 +20,7 @@
                 <a href="home.html" class="w3-wide"> <h3><b>IFruit</b></h3> </a>
             </div>
             <div class="w3-padding-64 w3-large w3-text-grey" style="font-weight:bold">
-                <a href="./index.jsp" class="w3-bar-item w3-button"> Login </a>
+                <a href="./login.jsp" class="w3-bar-item w3-button"> Entrar </a>
                 <a onclick="myAccFunc()" href="javascript:void(0)" class="w3-button w3-block w3-light-grey w3-left-align" id="myBtn">
                     Categorias <i class="fa fa-caret-down"></i>
                 </a>
@@ -29,15 +29,16 @@
                     <a href="#" class="w3-bar-item w3-button">Verduras</a>
                     <a href="#" class="w3-bar-item w3-button">Frutas</a>
                 </div>
+                <a href="./home_carrinho.jsp" class="w3-bar-item w3-button"> Comprar </a>
             </div>
             <a href="#footer" class="w3-bar-item w3-button">Contato</a>
             <a href="javascript:void(0)" class="w3-bar-item w3-button" onclick="document.getElementById('newsletter').style.display = 'block'">Promoções</a>
-            
+
         </nav>
 
         <!-- Top menu on small screens -->
         <header class="w3-bar w3-top w3-hide-large w3-black w3-xlarge">
-            <div class="w3-bar-item w3-padding-24 w3-wide">LOGO</div>
+           
             <a href="javascript:void(0)" class="w3-bar-item w3-button w3-padding-24 w3-right" onclick="w3_open()"><i class="fa fa-bars"></i></a>
         </header>
 
@@ -50,109 +51,39 @@
             <!-- Push down content on small screens -->
             <div class="w3-hide-large" style="margin-top:83px"></div>
 
-            <!-- Top header -->
-            <header class="w3-container w3-xlarge w3-black">
-                <p class="w3-left">Catálogo</p>
-                <p class="w3-right">
-                    <i class="fa fa-shopping-cart w3-margin-right"></i>
-                    <i class="fa fa-search"></i>
-                </p>
-            </header>
+            <h2 class="w3-center"></h2>
 
-            <!-- Image header -->
-            <div class="w3-display-container w3-container">
-                <img src="/imagem/Ifruit.png" alt="" style="width:20%">
-                <div class="w3-display-topleft w3-text-white" style="padding:24px 48px">
-                    <p><a href="#jeans" class="w3-button w3-black w3-padding-large w3-large">Compre agora</a></p>
-                </div>
+            <div class="w3-content w3-display-container">
+                <img class="mySlides" src="imagem/teste.jpg" style="width:100%">
+                <img class="mySlides" src="imagem/carrinho.jpg" style="width:100%">
+
+                <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
+                <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
             </div>
 
-            <div class="w3-container w3-text-grey" id="jeans">
+            <script>
+                var slideIndex = 1;
+                showDivs(slideIndex);
 
-            </div>
+                function plusDivs(n) {
+                    showDivs(slideIndex += n);
+                }
 
-            <!-- Product grid -->
-            <!-- <div class="w3-row w3-grayscale"> -->
-            <div class="w3-row ">
-                <div class="w3-col l3 s6">
-                    <div class="w3-display-container">
-                        <div class="w3-display-middle w3-display-hover">
-                            <button class="w3-button w3-black">Compre agora <i class="fa fa-shopping-cart"></i></button>
-                        </div>
-                        <img src="imagem/mamao_2.jpg" style="width:100%">
-                        <p>Mamão<br><b>R$1.99 cada</b></p>
-                    </div>
-                    <div class="w3-display-container">
-                        <img src="imagem/abacaxi.jpg" style="width:100%">
-                        <div class="w3-display-middle w3-display-hover">
-                            <button class="w3-button w3-black">Compre agora <i class="fa fa-shopping-cart"></i></button>
-                        </div>
-                        <p>Abacaxi<br><b>R$4.99 cada</b></p>
-                    </div>
-                </div>
-
-                <div class="w3-col l3 s6">
-                    <div class="w3-container">
-                        <div class="w3-display-container">
-                            <img src="imagem/uva_rubi.jpg" style="width:100%">
-                            <span class="w3-tag w3-display-topleft">Novo</span>
-                            <div class="w3-display-middle w3-display-hover">
-                                <button class="w3-button w3-black">Compre agora <i class="fa fa-shopping-cart"></i></button>
-                            </div>
-                        </div>
-                        <p>Uva rubi<br><b>R$3.99 o kilo</b></p>
-                    </div>
-                    </br>
-                    </br>
-                    </br>
-                    <div class="w3-display-container">
-                        <img src="imagem/banana.jpg" style="width:100%">
-                        <div class="w3-display-middle w3-display-hover">
-                            <button class="w3-button w3-black">Compre agora <i class="fa fa-shopping-cart"></i></button>
-                        </div>
-                        <p>Banana<br><b>R$2.00 a dúzia</b></p>
-                    </div>
-                </div>
-
-                <div class="w3-col l3 s6">
-                    <div class="w3-display-container">
-                        <img src="imagem/maça.jpg" style="width:100%">
-                        <div class="w3-display-middle w3-display-hover">
-                            <button class="w3-button w3-black">Compre agora <i class="fa fa-shopping-cart"></i></button>
-                        </div>
-                        <p>Maça<br><b>R$2.00 o kilo</b></p>
-
-                    </div>
-                    </br>
-                    <div class="w3-container">
-                        <div class="w3-display-container">
-                            <img src="imagem/melancia_2.jpg" style="width:100%">
-                            <span class="w3-tag w3-display-topleft">Promoção</span>
-                            <div class="w3-display-middle w3-display-hover">
-                                <button class="w3-button w3-black">Compre agora <i class="fa fa-shopping-cart"></i></button>
-                            </div>
-                        </div>
-                        <p>Melancia<br><b class="w3-text-red">R$5.99 cada</b></p>
-                    </div>
-                </div>
-
-                <div class="w3-col l3 s6">
-                    <div class="w3-display-container">
-                        <img src="imagem/melao.jpg" style="width:100%">
-                        <div class="w3-display-middle w3-display-hover">
-                            <button class="w3-button w3-black">Compre agora <i class="fa fa-shopping-cart"></i></button>
-                        </div>
-                        <p>Melão<br><b>R$1.99 cada</b></p>
-                    </div>
-                    <div class="w3-display-container">
-                        <img src="imagem/kiwi.jpg" style="width:100%">
-                        <div class="w3-display-middle w3-display-hover">
-                            <button class="w3-button w3-black">Compre agora <i class="fa fa-shopping-cart"></i></button>
-                        </div>
-                        <p>Kiwi<br><b>R$4.50 o kilo</b></p>
-                    </div>
-                </div>
-            </div>
+                function showDivs(n) {
+                    var i;
+                    var x = document.getElementsByClassName("mySlides");
+                    if (n > x.length) {
+                        slideIndex = 1
+                    }
+                    if (n < 1) {
+                        slideIndex = x.length
+                    }
+                    for (i = 0; i < x.length; i++) {
+                        x[i].style.display = "none";
+                    }
+                    x[slideIndex - 1].style.display = "block";
+                }
+            </script>
 
             <!-- Subscribe section -->
             <div class="w3-container w3-black w3-padding-32">

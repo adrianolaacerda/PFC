@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <welcome-file-list>
+        <welcome-file>home.jsp</welcome-file>
+    </welcome-file-list>
     <filter>
         <filter-name>AcessoAdminstrativo</filter-name>
         <filter-class>AutorizacaoDeAcesso.AcessoAdminstrativo</filter-class>
@@ -17,36 +20,12 @@
         <url-pattern>/principal.jsp</url-pattern>
     </filter-mapping>
     <servlet>
-        <servlet-name>ControleAcesso</servlet-name>
-        <servlet-class>Controle.ControleAcesso</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ControleUsuario</servlet-name>
-        <servlet-class>Controle.ControleUsuario</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ControleProduto</servlet-name>
-        <servlet-class>Controle.ControleProduto</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ControlePessoa</servlet-name>
-        <servlet-class>Controle.ControlePessoa</servlet-class>
+        <servlet-name>ControleCarrinho</servlet-name>
+        <servlet-class>Controle.ControleCarrinho</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>ControleAcesso</servlet-name>
-        <url-pattern>/ControleAcesso</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ControleUsuario</servlet-name>
-        <url-pattern>/ControleUsuario</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ControleProduto</servlet-name>
-        <url-pattern>/ControleProduto</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ControlePessoa</servlet-name>
-        <url-pattern>/ControlePessoa</url-pattern>
+        <servlet-name>ControleCarrinho</servlet-name>
+        <url-pattern>/ControleCarrinho</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

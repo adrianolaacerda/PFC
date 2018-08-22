@@ -10,8 +10,6 @@ import Modelo.Usuario;
 import DAO.UsuarioDAO;
 import Modelo.Pessoa;
 import java.io.IOException;
-import static java.lang.System.out;
-import java.sql.Date;
 import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -24,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author PC
  */
-@WebServlet(name = "ControleUsuario", urlPatterns = {"/ControleUsuario"})
+@WebServlet(name = "/ControleUsuario", urlPatterns = {"/ControleUsuario"})
 public class ControleUsuario extends HttpServlet {
 
     /**
@@ -44,10 +42,8 @@ public class ControleUsuario extends HttpServlet {
 
             if (acao.equals("Cadastrar")) {
                 Usuario usuario = new Usuario();
-                usuario.setLogin(request.getParameter("txtLogin"));
-                usuario.setSenha(request.getParameter("txtSenha"));
-                usuario.setPessoa(new Pessoa());
-                usuario.getPessoa().setId(Integer.parseInt(request.getParameter("idPessoa")));
+                usuario.setLogin(request.getParameter("login"));
+                usuario.setSenha(request.getParameter("senha"));
                 String perfil = request.getParameter("optPerfil");
                 if (perfil.equalsIgnoreCase("funcionario")) {
                     usuario.setPerfil(PerfilDeAcesso.Funcionario);
@@ -56,20 +52,11 @@ public class ControleUsuario extends HttpServlet {
                 }
 
                 UsuarioDAO usuarioDAO = new UsuarioDAO();
-                usuario = usuarioDAO.cadastrarUsuario(usuario);
-                
-                if (usuario.getId() != 0) {
-                    request.setAttribute("msg", "cadastrado com sucesso");
-                    request.setAttribute("usuario", usuario);
-                response.sendRedirect(request.getContextPath() + "/admin/sucesso.jsp");
-                } else {
-                    request.setAttribute("msg", "usuario ja existe");
+                usuarioDAO.cadastrarUsuario(usuario);
+
                 request.setAttribute("usuario", usuario);
-                response.sendRedirect(request.getContextPath() + "/admin/usuario-existe.jsp");
-                }
-                 
-                //RequestDispatcher rd = request.getRequestDispatcher("/admin/cadastro_usuario.jsp");
-                //rd.forward(request, response);
+                RequestDispatcher rd = request.getRequestDispatcher("/admin/sucesso.jsp");
+                rd.forward(request, response);
 
             } else if (acao.equals("Listar")) {
 
@@ -78,8 +65,8 @@ public class ControleUsuario extends HttpServlet {
 
                 //atribuir a lista ao request
                 request.getSession().setAttribute("listaUsuario", usuario);
-                response.sendRedirect(request.getContextPath() + "/admin/listaUsuario.jsp");
-                //request.getRequestDispatcher("/admin/listaUsuario.jsp").forward(request, response);
+                request.getRequestDispatcher("/admin/listaUsuario.jsp").forward(request, response);
+                response.sendRedirect(request.getContextPath() + "/listaUsuario.jsp");
 
             } else if (acao.equals("ConsultarUsuario")) {
 
@@ -110,7 +97,7 @@ public class ControleUsuario extends HttpServlet {
                 UsuarioDAO dao = new UsuarioDAO();
                 u = dao.ConsultarUsuario(u);
                 request.setAttribute("usuario", u);
-                request.getRequestDispatcher("/alterar_usuario.jsp").forward(request, response);
+                request.getRequestDispatcher("/admin/alterar_usuario.jsp").forward(request, response);
                 RequestDispatcher rd = request.getRequestDispatcher("/admin/sucesso.jsp");
 
             } else if (acao.equals("Excluir")) {
@@ -120,17 +107,13 @@ public class ControleUsuario extends HttpServlet {
 
                 Usuario usuario = new Usuario();
                 usuario.setId(id);
-
                 dao.excluir(usuario);
-
-                out.println("Usuario EXCLUIDO ");
 
                 RequestDispatcher rd = request.getRequestDispatcher("ControleUsuario?acao=Listar");
                 rd.forward(request, response);
-
             }
-
         } catch (Exception erro) {
+            erro.printStackTrace();
             RequestDispatcher rd = request.getRequestDispatcher("/erro.jsp");
             request.setAttribute("erro", erro);
             rd.forward(request, response);

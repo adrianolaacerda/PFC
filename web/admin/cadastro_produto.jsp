@@ -87,44 +87,15 @@
                                 <label for="nome">Nome </label>
                             </td>
                             <td align="left">
-                                <input  type="text" name="txtNome">
+                                <input  type="text" name="nome">
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <label for="DValidade">Data de validade </label>
+                                <label for="descricao">Descrição </label>
                             </td>
                             <td align="left">
-                                <input  type="date" name="txtDValidade">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label for="Quantidade">Quantidade</label>
-                            </td>
-                            <td align="left">
-                                <input type="text" name="txtQuantidade">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label for="Preco">Preço</label>
-                            </td>
-                            <td align="left">
-                                <input  type="text" name="txtPreco" required>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label for="medida">Tipo de medida</label>
-                            </td>
-                            <td align="left">
-                                <select name="optTPreco"> 
-                                    <option>Selecionar</option>
-                                    <option>Duzia</option>
-                                    <option>Unidade</option>
-                                    <option>Peso</option>
-                                </select>
+                                <input  type="text" name="descricao">
                             </td>
                         </tr>
                         <tr>
@@ -132,14 +103,22 @@
                                 <label for="categoria">Categoria</label>
                             </td>
                             <td align="left">
-                                <select name="optCategoria">
+                                <select name="categoria">
                                     <option>Selecionar</option>
                                     <option>Fruta</option>
                                     <option>Verdura</option>
                                     <option>Legumes</option>
                                 </select>
                             </td>
-                        </tr
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="precoUnitario">Preço</label>
+                            </td>
+                            <td align="left">
+                                <input  type="text" name="precoUnitario" required>
+                            </td>
+                        </tr>
                         <tr>
                             <td>
                                 <label for="Imagem">Imagem</label>

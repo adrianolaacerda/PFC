@@ -112,7 +112,6 @@
                             <select name="optPerfil"> 
                                 <option value="select">Selecionar</option> 
                                 <option value="cliente">Cliente</option> 
-                                <option value="funcionario">Funcionário</option> 
                             </select>
                         </td>
                     </table>

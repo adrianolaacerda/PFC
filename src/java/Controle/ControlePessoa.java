@@ -8,6 +8,7 @@ package Controle;
 import DAO.PessoaDAO;
 import Modelo.Pessoa;
 import java.io.IOException;
+import java.io.PrintWriter;
 import static java.lang.System.out;
 import java.sql.Date;
 import java.util.ArrayList;
@@ -106,6 +107,8 @@ public class ControlePessoa extends HttpServlet {
                 pessoa.setId(Integer.parseInt(request.getParameter("txtID")));
 
                 PessoaDAO pessoaDAO = new PessoaDAO();
+                
+                //PrintWriter out = response.getWriter();
                 pessoaDAO.alterar(pessoa);
                 request.setAttribute("pessoa", pessoa);
                 RequestDispatcher rd = request.getRequestDispatcher("/admin/sucesso.jsp");
@@ -126,20 +129,15 @@ public class ControlePessoa extends HttpServlet {
             } else if (acao.equals("Excluir")) {
 
                 PessoaDAO dao = new PessoaDAO();
-                int id = Integer.parseInt(request.getParameter("txtid"));
+                int id = Integer.parseInt(request.getParameter("id"));
 
                 Pessoa pessoa = new Pessoa();
                 pessoa.setId(id);
-
                 dao.excluir(pessoa);
-
-                out.println("Cadastro excluído ");
 
                 RequestDispatcher rd = request.getRequestDispatcher("ControlePessoa?acao=Listar");
                 rd.forward(request, response);
-
             }
-
         } catch (Exception erro) {
             erro.printStackTrace();
             RequestDispatcher rd = request.getRequestDispatcher("/erro.jsp");

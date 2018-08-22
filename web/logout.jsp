@@ -62,8 +62,7 @@
 
 
 
-
-            <header class="w3-container w3-xlarge w3-black">
+<header class="w3-container w3-xlarge w3-black">
                 <p class="w3-left">Acesso Negado</p>
                 <p class="w3-right">
                 </p>
@@ -75,7 +74,7 @@
             </br></br></br></br>
             <center>
                 <a href="home.html"> Página Principal </a></br></br>
-                <a href="index.jsp"> Logar Novamente </a></br></br>
+                <a href="login.jsp"> Logar Novamente </a></br></br>
             </center>
             <!-- Footer -->
             <footer class="w3-padding-64 w3-light-grey w3-small w3-center" id="footer">

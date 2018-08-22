@@ -118,7 +118,7 @@
 
             </br></br>
             <center>
-                <td><a href="listas_adm.jsp" class="w3-bar-item w3-button"> Voltar </a></td>
+                <td><a href="admin/listas_adm.jsp" class="w3-bar-item w3-button"> Voltar </a></td>
             </center>
             <!-- Footer -->
             <footer class="w3-padding-64 w3-light-grey w3-small w3-center" id="footer">

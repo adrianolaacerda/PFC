@@ -1,50 +1,45 @@
 <%-- 
-    Document   : listaProduto
-    Created on : 21/02/2018, 16:09:23
-    Author     : pc
+    Document   : index
+    Created on : 23/05/2018, 17:55:39
+    Author     : PC
 --%>
 
-<%@page import="java.math.RoundingMode"%>
-<%@page import="java.math.BigDecimal"%>
 <%@page import="Modelo.Produto"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
 <html>
-    <title>IFruit</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <style>
-        .w3-sidebar a {font-family: "Roboto", sans-serif}
-        body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
-    </style>
-    <body class="w3-content" style="max-width:1200px">
+<title>IFruit</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+    .w3-sidebar a {font-family: "Roboto", sans-serif}
+    body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
+</style>
+<body class="w3-content" style="max-width:1200px">
 
-        <!-- Sidebar/menu -->
-        <nav class="w3-sidebar w3-bar-block w3-light-grey w3-collapse w3-top" style="z-index:3;width:250px" id="mySidebar">
-            <div class="w3-container w3-display-container w3-padding-16">
-                <i onclick="w3_close()" class="fa fa-remove w3-hide-large w3-button w3-display-topright"></i>
-                <a  class="w3-wide"> <h3><b>IFruit</b></h3> </a>
+    <!-- Sidebar/menu -->
+    <nav class="w3-sidebar w3-bar-block w3-light-grey w3-collapse w3-top" style="z-index:3;width:250px" id="mySidebar">
+        <div class="w3-container w3-display-container w3-padding-16">
+            <i onclick="w3_close()" class="fa fa-remove w3-hide-large w3-button w3-display-topright"></i>
+            <a href="home.html" class="w3-wide"> <h3><b>IFruit</b></h3> </a>
+        </div>
+        <div class="w3-padding-64 w3-large w3-text-grey" style="font-weight:bold">
+            <a href="./login.jsp" class="w3-bar-item w3-button"> Entrar </a>
+            <a onclick="myAccFunc()" href="javascript:void(0)" class="w3-button w3-block w3-light-grey w3-left-align" id="myBtn">
+                Categorias <i class="fa fa-caret-down"></i>
+            </a>
+            <div id="demoAcc" class="w3-bar-block w3-hide w3-padding-large w3-medium">
+                <a href="#" class="w3-bar-item w3-button">Legumes</a>
+                <a href="#" class="w3-bar-item w3-button">Verduras</a>
+                <a href="#" class="w3-bar-item w3-button">Frutas</a>
             </div>
-            <div class="w3-padding-64 w3-large w3-text-grey" style="font-weight:bold">
-                <a href="../home.html" class="w3-bar-item w3-button"> IFruit </a>
-                <a onclick="myAccFunc()" href="javascript:void(0)" class="w3-button w3-block w3-light-grey w3-left-align" id="myBtn">
-                    Categorias <i class="fa fa-caret-down"></i>
-                </a>
-                <div id="demoAcc" class="w3-bar-block w3-hide w3-padding-large w3-medium">
-                    <a href="#" class="w3-bar-item w3-button">Legumes</a>
-                    <a href="#" class="w3-bar-item w3-button">Verduras</a>
-                    <a href="#" class="w3-bar-item w3-button">Frutas</a>
-                </div>
-            </div>
-            <a href="#footer" class="w3-bar-item w3-button w3-padding">Contato</a> 
-            <a href="javascript:void(0)" class="w3-bar-item w3-button w3-padding" onclick="document.getElementById('newsletter').style.display = 'block'">Promoções</a> 
-
+            <a href="./home_carrinho.jsp" class="w3-bar-item w3-button"> Comprar </a>
+        </div>
+        <a href="#footer" class="w3-bar-item w3-button">Contato</a>
+        <a href="javascript:void(0)" class="w3-bar-item w3-button" onclick="document.getElementById('newsletter').style.display = 'block'">Promoções</a>
         </nav>
 
         <!-- Top menu on small screens -->
@@ -52,7 +47,6 @@
             <div class="w3-bar-item w3-padding-24 w3-wide">LOGO</div>
             <a href="javascript:void(0)" class="w3-bar-item w3-button w3-padding-24 w3-right" onclick="w3_open()"><i class="fa fa-bars"></i></a>
         </header>
-
         <!-- Overlay effect when opening sidebar on small screens -->
         <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
 
@@ -62,67 +56,83 @@
             <!-- Push down content on small screens -->
             <div class="w3-hide-large" style="margin-top:83px"></div>
 
-
+            <h2 class="w3-center"></h2>
+        <body>
             <%
-                //recupera a lista do request
-                ArrayList<Produto> listaProduto = (ArrayList<Produto>) request.getAttribute("listaProduto");
-
+                // Recupera os produtos.
+                java.util.List<Produto> produtos = (java.util.List<Produto>) request.getAttribute("produtos");
+                if (produtos == null) {
+                    request.getRequestDispatcher("/ControleProduto?acao=listaProdutos").forward(request,
+                            response);
+                }
             %>
-            <table width="100%" border="1">
-                <header class="w3-container w3-xlarge w3-black">
-                    <p class="w3-left">Lista de Produto</p>
-                    <p class="w3-right">
-                    </p>
-                </header>
-                </br></br>
-                <center>
-                    <align>
-                        <td>ID </td>
-                        <td>Nome</td>   
-                        <td>Descrição</td>
-                        <td>Categoria</td>  
-                        <td>Preço</td> 
-                        <td>Imagem</td>
 
-                        <td>Alterar</td>
-                        <td>Excluir</td>
+        <center><h1>Lista de Produtos</h1></center>
+            <table border="0" cellpadding="5" align="center">
+                <%
+                    int contadorColuna = 1;
+                    for (Produto produto : produtos) {
+                        //se é o primeiro produto, cria o inicio da linha
+                        if (contadorColuna == 1) {
+                            out.println("<tr>");
+                        }
+                %>
+                <td align="center" valign="bottom"> <img src="imagens/<%=produto.getImagem()%>"
+                                                         alt="Imagem do produto<%=produto.getImagem()%>"/> <br/>
+                    <%=produto.getNome()%><br/>
+                    <a href="ControleCarrinho?acao=addProduto&idProduto=<%=produto.getId()%>">
+                        Comprar</a></td>
+                        <%
+                                //se é o último produto, exibir o término da linha
+                                if (contadorColuna == 3) {
+                                    out.println("</tr>");
+                                    contadorColuna = 0;
+                                }
+                                //atualiza o contador de colulas
+                                contadorColuna++;
 
-                </center>
-                </align>
-
-                </thead>            
-                <tbody>
-                    <%                    for (Produto p : listaProduto) {
-
-                    %>
-                    <tr> 
-                        <td> <%= p.getId()%></td>
-                        <td> <%= p.getNome()%></td>
-                        <td> <%= p.getDescricao()%></td>
-                        <td> <%= p.getCategoria()%> </td> 
-                        <td> <% out.println(new BigDecimal(p.getPrecoUnitario()).setScale(2,RoundingMode.HALF_UP).doubleValue()); %> </td>  
-                        <td> <%= p.getImagem()%> </td>
-
-
-
-                        <td><a href="ControleProduto?acao=AlterarProduto&id=<%=p.getId()%>" class="w3-bar-item w3-button"> ❖ </a></td>
-                        <td> <a href="ControleProduto?acao=Excluir&id=<%=p.getId()%>"class="w3-bar-item w3-button"> ✖ </a> </td>
-                    </tr>
-                    <%
-                        } // fim do for
-                    %> 
-                </tbody>    
+                            }//fim do for
+%>
             </table>
 
-            </br></br>
-            <center>
-                <td><a href="admin/listas_adm.jsp" class="w3-bar-item w3-button"> Voltar </a></td>
-            </center>
+        </body>
+        
+        <script>
+                var slideIndex = 1;
+                showDivs(slideIndex);
+
+                function plusDivs(n) {
+                    showDivs(slideIndex += n);
+                }
+
+                function showDivs(n) {
+                    var i;
+                    var x = document.getElementsByClassName("mySlides");
+                    if (n > x.length) {
+                        slideIndex = 1
+                    }
+                    if (n < 1) {
+                        slideIndex = x.length
+                    }
+                    for (i = 0; i < x.length; i++) {
+                        x[i].style.display = "none";
+                    }
+                    x[slideIndex - 1].style.display = "block";
+                }
+            </script>
+
+            <!-- Subscribe section -->
+            <div class="w3-container w3-black w3-padding-32">
+                <h1>Se inscrever</h1>
+                <p>Para obter ofertas especiais e tratamento VIP:</p>
+                <p><input class="w3-input w3-border" type="text" placeholder="Entre com o e-mail" style="width:100%"></p>
+                <button type="button" class="w3-button w3-red w3-margin-bottom">Enviar</button>
+            </div>
+
             <!-- Footer -->
             <footer class="w3-padding-64 w3-light-grey w3-small w3-center" id="footer">
                 <div class="w3-row-padding">
                     <div class="w3-col s4">
-
                         <h4>Contato</h4>
                         <p>Perguntas? Continue.</p>
                         <form action="/action_page.php" target="_blank">
@@ -131,7 +141,6 @@
                             <p><input class="w3-input w3-border" type="text" placeholder="Assunto" name="Assunto" required></p>
                             <p><input class="w3-input w3-border" type="text" placeholder="Mensagem" name="Mensagem" required></p>
                             <button type="submit" class="w3-button w3-block w3-black">Enviar</button>
-
                         </form>
                     </div>
 
@@ -182,7 +191,7 @@
         </div>
 
         <script>
-            // Accordion 
+            // Accordion
             function myAccFunc() {
                 var x = document.getElementById("demoAcc");
                 if (x.className.indexOf("w3-show") == -1) {

@@ -92,7 +92,7 @@
                                 <label for="id ">ID </label>
                             </td>
                             <td align="left">
-                                <input type="hidden" name="txtID" value=<%=produto.getId()%>>
+                                <input type="hidden" name="id" value=<%=produto.getId()%>>
                             </td>
                         </tr>
                         <tr>
@@ -100,68 +100,48 @@
                                 <label for="nome">Nome </label>
                             </td>
                             <td align="left">
-                                <input  type="text" name="txtNome" value=<%=produto.getNome()%>>
+                                <input  type="text" name="nome" value=<%=produto.getNome()%>>
                             </td>
                         </tr>
-                        <tr>
+                      <tr>
                             <td>
-                                <label for="DValidade">Data de validade </label>
+                                <label for="descricao">Descrição </label>
                             </td>
                             <td align="left">
-                                <input  type="date" name="txtDValidade" value=<%=produto.getDataValidade() %>>
+                                <input  type="text" name="descricao" value=<%=produto.getDescricao()%>>
                             </td>
                         </tr>
-                        <tr>
-                            <td>
-                                <label for="Quantidade">Quantidade</label>
-                            </td>
-                            <td align="left">
-                                <input type="text" name="txtQuantidade" value=<%=produto.getQuantidade() %>>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label for="Preco">Preço</label>
-                            </td>
-                            <td align="left">
-                                <input  type="text" name="txtPreco" required value=<%=produto.getPreco() %>>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label for="medida">Tipo de medida</label>
-                            </td>
-                            <td align="left">
-                                <select name="optTPreco" value=<%=produto.getTipoPreco() %>>
-                                    <option>Selecionar</option>
-                                    <option>Duzia</option>
-                                    <option>Unidade</option>
-                                    <option>Peso</option>
-                                </select>
-                            </td>
-                        </tr>
-                       
                         <tr>
                             <td>
                                 <label for="categoria">Categoria</label>
                             </td>
                             <td align="left">
-                                <select name="optCategoria" value=<%=produto.getCategoria() %>>
+                                <select name="categoria" value=<%=produto.getCategoria()%>>
                                     <option>Selecionar</option>
                                     <option>Fruta</option>
                                     <option>Verdura</option>
                                     <option>Legumes</option>
                                 </select>
                             </td>
-                        </tr
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="precoUnitario">Preço</label>
+                            </td>
+                            <td align="left">
+                                <input  type="text" name="precoUnitario" value=<%=produto.getPrecoUnitario()%>>
+                            </td>
+                        </tr>
                         <tr>
                             <td>
                                 <label for="Imagem">Imagem</label>
                             </td>
                             <td align="left">
-                                <input  type="file" name="Imagem" required value=<%=produto.getImagem()%>>
+                                <input  type="file" name="Imagem" value=<%=produto.getImagem()%>>
                             </td>
                         </tr>
+                       
+                       
 
                     </table>
 
@@ -169,7 +149,7 @@
                 </br></br>
 
                 
-                <button type="submit" class="w3-button w3-black " value="Alterar" name="acao" >Enviar</button>
+                <button type="submit" class="w3-button w3-black " value="AlterarProduto" name="acao" >Enviar</button>
 
             </form></br></br>
             <td><a href="${pageContext.request.contextPath}/listas_adm.jsp" class="w3-bar-item w3-button"> Voltar </a></td>

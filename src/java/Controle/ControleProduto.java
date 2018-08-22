@@ -7,9 +7,7 @@ package Controle;
  */
  /*package Controle*/
 import DAO.ProdutoDAO;
-import Modelo.Categoria;
 import Modelo.Produto;
-import Modelo.TipoProduto;
 import java.io.IOException;
 import static java.lang.System.out;
 import java.sql.Date;
@@ -45,32 +43,13 @@ public class ControleProduto extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String acao = request.getParameter("acao");
         if (acao.equals("CadastrarProduto")) {
+            
             Produto produto = new Produto();
-            produto.setNome(request.getParameter("txtNome"));
-            produto.setDataValidade(Date.valueOf(request.getParameter("txtDValidade")));
-            produto.setQuantidade(Integer.parseInt(request.getParameter("txtQuantidade")));
-            produto.setPreco(Double.parseDouble(request.getParameter("txtPreco")));
-            String tipoPreco = request.getParameter("optTPreco");
-            if (tipoPreco.equalsIgnoreCase("Duzia")) {
-                produto.setTipoPreco(TipoProduto.Duzia);
-            } else if (tipoPreco.equalsIgnoreCase("Unidade")) {
-                produto.setTipoPreco(TipoProduto.Unidade);
-            } else if (tipoPreco.equalsIgnoreCase("Peso")) {
-                produto.setTipoPreco(TipoProduto.Peso);
-            } else {
-                produto.setTipoPreco(TipoProduto.SELECIONAR);
-            }
-
-            String categoria = request.getParameter("optCategoria");
-            if (categoria.equalsIgnoreCase("Fruta")) {
-                produto.setCategoria(Categoria.Frutas);
-            } else if (categoria.equalsIgnoreCase("Legumes")) {
-                produto.setCategoria(Categoria.Legumes);
-            } else if (categoria.equalsIgnoreCase("Verdura")) {
-                produto.setCategoria(Categoria.Verduras);
-            } else {
-                produto.setCategoria(Categoria.Selecionar);
-            }
+            
+            produto.setNome(request.getParameter("nome"));
+            produto.setDescricao(request.getParameter("descricao"));
+            produto.setCategoria(request.getParameter("categoria"));
+            produto.setPrecoUnitario(Double.parseDouble(request.getParameter("precoUnitario")));
             produto.setImagem(request.getParameter("Imagem"));
 
             ProdutoDAO dao = new ProdutoDAO();
@@ -85,7 +64,7 @@ public class ControleProduto extends HttpServlet {
         } else if (acao.equals("Listar")) {
 
             ProdutoDAO dao = new ProdutoDAO();
-            ArrayList<Produto> produto = dao.listar();
+            ArrayList<Produto> produto = (ArrayList<Produto>) dao.listar();
 
             //atribuir a lista ao request
             request.setAttribute("listaProduto", produto);
@@ -113,10 +92,12 @@ public class ControleProduto extends HttpServlet {
                 produto.setId(Integer.parseInt(request.getParameter("id")));
 
                 ProdutoDAO produtoDAO = new ProdutoDAO();
+                
                 produtoDAO.alterar(produto);
                 request.setAttribute("produto", produto);
                 RequestDispatcher rd = request.getRequestDispatcher("/admin/sucesso.jsp");
                 rd.forward(request, response);
+                
 
             } else if (acao.equals("AlterarProduto")) {
                 Produto p = new Produto();
@@ -127,7 +108,8 @@ public class ControleProduto extends HttpServlet {
                 request.getRequestDispatcher("/admin/alterar_produto.jsp").forward(request, response);
                 RequestDispatcher rd = request.getRequestDispatcher("/admin/sucesso.jsp");
    
-
+                
+                
                 // EXCLUIR
                 
         } else if (acao.equals("Excluir")) {
@@ -145,7 +127,15 @@ public class ControleProduto extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher("ControleProduto?acao=Listar");
             rd.forward(request, response);
 
-        }
+        } else if (acao.equals("listaProdutos")) {
+                //monta uma lista para exibição na pagina principal
+                ArrayList<Produto> produtos = new ProdutoDAO().listar();
+                //armazena os produto na requisição
+                request.setAttribute("produtos", produtos);
+                //invia para index.jsp
+                request.getRequestDispatcher("/home_carrinho.jsp").forward(request, response);
+            }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

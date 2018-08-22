@@ -5,51 +5,43 @@
  */
 package Modelo;
 
-import java.sql.Date;
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  *
  * @author 11151102481
  */
 public class Produto {
 
-    //declarando atributos 
-    private int id;
-    private String nome;
-    private Date dataValidade;
-    private int quantidade;
-    private double preco;
-    private TipoProduto tipoPreco;
-    private Categoria categoria;
-    private String imagem;
 
-    //construtor vazio
+     // declarando
+    private Integer id;
+    private String nome;
+    private String descricao;
+    private String categoria;
+    private double precoUnitario;
+    private String imagem;
+    
+    
+    // construtor vazio
     public Produto() {
     }
-    
-    //construtor 
 
-    public Produto(int id, String nome, Date dataValidade, int quantidade, double preco, TipoProduto tipoPreco, Categoria categoria, String imagem) {
+    // construtor cheio
+    public Produto(Integer id, String nome, String descricao, String categoria, double precoUnitario, String imagem) {
         this.id = id;
         this.nome = nome;
-        this.dataValidade = dataValidade;
-        this.quantidade = quantidade;
-        this.preco = preco;
-        this.tipoPreco = tipoPreco;
+        this.descricao = descricao;
         this.categoria = categoria;
+        this.precoUnitario = precoUnitario;
         this.imagem = imagem;
     }
-    
-
-    //getter e setter
-
-    public int getId() {
+   
+  
+    // gets e sets
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -61,44 +53,28 @@ public class Produto {
         this.nome = nome;
     }
 
-    public Date getDataValidade() {
-        return dataValidade;
+    public String getDescricao() {
+        return descricao;
     }
 
-    public void setDataValidade(Date dataValidade) {
-        this.dataValidade = dataValidade;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
-    public int getQuantidade() {
-        return quantidade;
-    }
-
-    public void setQuantidade(int quantidade) {
-        this.quantidade = quantidade;
-    }
-
-    public double getPreco() {
-        return preco;
-    }
-
-    public void setPreco(double preco) {
-        this.preco = preco;
-    }
-
-    public TipoProduto getTipoPreco() {
-        return tipoPreco;
-    }
-
-    public void setTipoPreco(TipoProduto tipoPreco) {
-        this.tipoPreco = tipoPreco;
-    }
-
-    public Categoria getCategoria() {
+    public String getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(Categoria categoria) {
+    public void setCategoria(String categoria) {
         this.categoria = categoria;
+    }
+
+    public double getPrecoUnitario() {
+        return precoUnitario;
+    }
+
+    public void setPrecoUnitario(double precoUnitario) {
+        this.precoUnitario = precoUnitario;
     }
 
     public String getImagem() {
@@ -108,9 +84,4 @@ public class Produto {
     public void setImagem(String imagem) {
         this.imagem = imagem;
     }
-    
-   
-
-
-    
 }

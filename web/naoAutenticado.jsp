@@ -75,7 +75,7 @@
             </center>
             </br></br></br></br>
             <center>
-                <a href="index.jsp"> Logar </a></br></br>
+                <a href="login.jsp"> Logar </a></br></br>
             </center>
             <!-- Footer -->
             <footer class="w3-padding-64 w3-light-grey w3-small w3-center" id="footer">

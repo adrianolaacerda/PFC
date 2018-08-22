@@ -39,29 +39,48 @@ public class UsuarioDAO {
     private static final String UPDATE_USUARIO = "UPDATE usuario SET  login = ?, senha = ?, perfil = ? WHERE id = ?";
     private static final String DELETE_USUARIO = "DELETE FROM usuario WHERE id = ?";
 
-    public Usuario cadastrarUsuario(Usuario usuario) {
-        try {
-            PreparedStatement pstmt = conexao.prepareStatement("INSERT INTO usuario VALUES(DEFAULT, ?, ?, ?, ?)");
-            pstmt.setString(1, usuario.getLogin());
-            pstmt.setString(2, usuario.getSenha());
-            pstmt.setString(3, usuario.getPerfil().toString());
-            pstmt.setInt(4, usuario.getPessoa().getId());
-            pstmt.executeUpdate();
+    public void cadastrarUsuario(Usuario usuario) {
+ try {
+            conexao.setAutoCommit(false);
+           
+            
+            PreparedStatement pstmtUsuario = conexao.prepareStatement(CADASTRAR_USUARIO, PreparedStatement.RETURN_GENERATED_KEYS);
+           
+            pstmtUsuario.setString(1, usuario.getLogin());
+            pstmtUsuario.setString(2, usuario.getSenha());
+            pstmtUsuario.setString(3, usuario.getPerfil().toString());
+            pstmtUsuario.execute();
+            
+            ResultSet rsIdUsuario = pstmtUsuario.getGeneratedKeys();
+            rsIdUsuario.next();
+            //seta o id do cliente gerado no banco
+            usuario.setId(rsIdUsuario.getInt("id"));
+            
+           
+            //confirma as operações
+            conexao.commit();
+   
+        }catch (SQLException e) {
+            try {
+                conexao.rollback();
 
-            pstmt = conexao.prepareStatement("SELECT id FROM usuario WHERE login = ?");
-            pstmt.setString(1, usuario.getLogin());
-            ResultSet rs = pstmt.executeQuery();
-
-            if (rs.next()) {
-                usuario.setId(rs.getInt("id"));
+            } catch (SQLException ex) {
+                Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
-            conexao.close();
-        } catch (Exception e) {
-            e.printStackTrace();
+            Logger.getLogger(Usuario.class.getName()).
+                    log(Level.SEVERE, "Erro ao cadastrar: " + e.getMessage());
+        } finally {
+            //4
+            if (conexao != null) {
+                try {
+                    conexao.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
         }
-        return usuario;
     }
-
+      
     public Usuario autenticarUsuario(Usuario usuario) {
         Usuario usuarioAutenticado = null;
         Connection conexao = null;
@@ -160,6 +179,7 @@ public class UsuarioDAO {
             pstmt.setString(1, usuario.getLogin());
             pstmt.setString(2, usuario.getSenha());
             pstmt.setString(3, usuario.getPerfil().toString());
+            pstmt.setInt(4, usuario.getId());
             pstmt.executeUpdate();
 
         } catch (SQLException e) {
@@ -174,15 +194,12 @@ public class UsuarioDAO {
     }
 
     public void excluir(Usuario usuario) {
-        Connection conexao = null;
-
+        
         try {
-
-            conexao = ConectaBanco.getConexao();
-
             PreparedStatement pstmt = conexao.prepareStatement(DELETE_USUARIO);
             pstmt.setInt(1, usuario.getId());
             pstmt.execute();
+            conexao.commit();
 
         } catch (SQLException e) {
             throw new RuntimeException(e);

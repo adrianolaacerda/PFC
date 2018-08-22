@@ -77,7 +77,7 @@
                 <h1><b>Sucesso!</b></h1>
             </center>
                 
-            <td><a href="autenticado_adm.jsp" class="w3-bar-item w3-button"> Voltar </a></td>
+            <td><a href="admin/autenticado_adm.jsp" class="w3-bar-item w3-button"> Voltar </a></td>
             </br>
             </center>
             

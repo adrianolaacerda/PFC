@@ -160,14 +160,13 @@ public class PessoaDAO {
     }
 
     public void alterar(Pessoa pessoa) {
-        Connection conexao = null;
-
+        //Connection conexao = null;
+        String cep;
         try {
 
-            conexao = ConectaBanco.getConexao();
-
+            //conexao = ConectaBanco.getConexao();
+         
             PreparedStatement pstmt = conexao.prepareStatement(UPDATE_PESSOA);
-
             pstmt.setString(1, pessoa.getNome());
             pstmt.setInt(2, pessoa.getCpf());
             pstmt.setInt(3, pessoa.getRg());
@@ -176,12 +175,16 @@ public class PessoaDAO {
             pstmt.setString(6, pessoa.getTelefone());
             pstmt.setString(7, pessoa.getLogradouro());
             pstmt.setInt(8, pessoa.getNumero());
-            pstmt.setInt(9, pessoa.getCep());
+            pstmt.setString(9, Integer.toString(pessoa.getCep()));
             pstmt.setString(10, pessoa.getBairro());
             pstmt.setString(11, pessoa.getCidade());
             pstmt.setString(12, pessoa.getEstado());
             pstmt.setInt(13, pessoa.getId());
             pstmt.executeUpdate();
+            conexao.commit();
+            
+            
+            //return pstmt.toString();
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -195,15 +198,12 @@ public class PessoaDAO {
     }
 
     public void excluir(Pessoa pessoa) {
-        Connection conexao = null;
-
+        
         try {
-
-            conexao = ConectaBanco.getConexao();
-
             PreparedStatement pstmt = conexao.prepareStatement(DELETE_PESSOA);
             pstmt.setInt(1, pessoa.getId());
             pstmt.execute();
+            conexao.commit();
 
         } catch (SQLException e) {
             throw new RuntimeException(e);

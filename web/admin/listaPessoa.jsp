@@ -87,13 +87,13 @@
                             <td>RG</td>
                             <td>Data Nascimento</td>
                             <td>E-mail</td>
+                            <td> Telefone </td>
                             <td>Logradouro</td>
                             <td>Número</td>
                             <td>CEP</td>
                             <td>Bairro</td>
                             <td>Cidade</td>
-                            <td>Estado</td>
-                            <td>Telefone</td>
+                            <td>Estado</td>                           
                             <td>Alterar </td>
                             <td>Excluir </td>
                         </align>
@@ -113,13 +113,13 @@
                             <td> <%= pessoa.getDataNasc()%> </td>
                             <td> <%= pessoa.getEmail()%> </td>
                             <td> <%= pessoa.getTelefone()%>   </td>
-                            <td> <%= pessoa.getId()%></td>
                             <td> <%= pessoa.getLogradouro()%>   </td>
                             <td> <%= pessoa.getNumero()%>   </td>
                             <td> <%= pessoa.getCep()%>   </td>
                             <td> <%= pessoa.getBairro()%>   </td>
                             <td> <%= pessoa.getCidade()%>   </td>
                             <td> <%= pessoa.getEstado()%>   </td>
+                            
 
                             <td> <a href="ControlePessoa?acao=AlterarPessoa&id=<%=pessoa.getId()%>"class="w3-bar-item w3-button"> ✖ </a> </td>
                             <td> <a href="ControlePessoa?acao=Excluir&id=<%=pessoa.getId()%>"class="w3-bar-item w3-button"> ✖ </a> </td>

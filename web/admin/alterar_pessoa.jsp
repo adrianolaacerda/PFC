@@ -83,10 +83,10 @@
                     <table cellspacing="4">
                         <tr>
                             <td>
-                                <label for="id ">ID </label>
+                                <label type="hidden" for="id ">ID </label>
                             </td>
                             <td align="left">
-                                <input type="text" name="txtID" value="<%=pessoa.getId()%>">
+                                <input type="hidden" name="txtID" value="<%=pessoa.getId()%>">
                             </td>
                         </tr>
                         <tr>
